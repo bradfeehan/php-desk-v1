@@ -1,0 +1,20 @@
+{
+	"name": "99designs/php-desk",
+	"description": "PHP client for Desk.com API based on Guzzle",
+	"keywords": ["desk", "desk.com", "assistly", "assistly.com", "api", "guzzle", "99designs"],
+	"licence": "MIT",
+	"authors": [
+		{ "name": "Brad Feehan", "email": "brad.feehan@99designs.com" }
+	],
+	"require": {
+		"php": ">=5.3",
+		"guzzle/guzzle": "~3.2"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~3.7",
+		"mockery/mockery": ">=0.7.2"
+	},
+	"autoload": {
+		"psr-0": { "Desk": "src" }
+	}
+}

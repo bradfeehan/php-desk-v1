@@ -1,0 +1,11 @@
+{
+	"name": "Account",
+	"description": "Client for Desk account API",
+	"operations": {
+		"VerifyCredentials": {
+			"summary": "Verifies OAuth credentials used",
+			"httpMethod": "GET",
+			"uri": "account/verify_credentials.json"
+		}
+	}
+}

@@ -4,3 +4,6 @@
 # PHPUnit
 /tests/coverage/
 /phpunit.xml
+
+# Test service builder config
+/tests/service/test.json

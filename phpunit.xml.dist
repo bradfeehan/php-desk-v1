@@ -13,6 +13,12 @@
 		</testsuite>
 	</testsuites>
 
+	<groups>
+		<exclude>
+			<group>network</group>
+		</exclude>
+	</groups>
+
 	<!-- Filters for code coverage reporting -->
 	<filter>
 		<whitelist>

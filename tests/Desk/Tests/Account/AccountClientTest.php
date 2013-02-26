@@ -47,4 +47,24 @@ class AccountClientTest extends \Guzzle\Tests\GuzzleTestCase
         $filename = AccountClient::getServiceDescriptionFilename();
         $this->assertStringEndsWith('/src/Desk/Account/client.json', $filename);
     }
+
+    /**
+     * @covers Desk\Account\AccountClient::getCommand
+     */
+    public function testGetCommand()
+    {
+        $client = new AccountClient();
+
+        $command = \Mockery::mock('Guzzle\\Service\\Command\\OperationCommand[]');
+
+        $commandFactory = \Mockery::mock('Guzzle\\Service\\Command\\Factory\\FactoryInterface')
+            ->shouldReceive('factory')
+            ->andReturn($command)
+            ->mock();
+
+        $client->setCommandFactory($commandFactory);
+
+        $result = $client->getCommand('test');
+        $this->assertInstanceOf('Desk\\ResponseParser', $result->getResponseParser());
+    }
 }

@@ -12,6 +12,10 @@
 		"mock.account": {
 			"class": "Desk\\Account\\AccountClient",
 			"extends": "mock"
+		},
+		"mock.cases": {
+			"class": "Desk\\Cases\\CasesClient",
+			"extends": "mock"
 		}
 	}
 }

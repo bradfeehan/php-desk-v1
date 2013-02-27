@@ -1,7 +1,7 @@
 <?php
 
+use Desk\Testing\UnitTestCase;
 use Guzzle\Service\Builder\ServiceBuilder;
-use Guzzle\Tests\GuzzleTestCase;
 
 $ds = DIRECTORY_SEPARATOR;
 
@@ -25,4 +25,6 @@ if (isset($_SERVER['DESK_TEST_CONFIG'])) {
     $path = __DIR__ . '/service/mock.json';
 }
 
-GuzzleTestCase::setServiceBuilder(ServiceBuilder::factory($path));
+UnitTestCase::setServiceBuilder(ServiceBuilder::factory($path));
+UnitTestCase::setTestsBasePath(__DIR__);
+UnitTestCase::setMockBasePath(__DIR__ . '/mock');

@@ -9,7 +9,7 @@ use Desk\Testing\MockModel\DataModel;
 use Desk\Testing\MockModel\ResponseModel;
 use Guzzle\Http\Message\Response;
 
-class ModelFactoryTest extends \Guzzle\Tests\GuzzleTestCase
+class ModelFactoryTest extends \Desk\Testing\UnitTestCase
 {
 
     public function setUp()

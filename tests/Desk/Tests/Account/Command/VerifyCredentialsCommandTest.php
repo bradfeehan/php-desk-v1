@@ -2,7 +2,7 @@
 
 namespace Desk\Tests\Account\Command;
 
-class VerifyCredentialsCommandTest extends \Guzzle\Tests\GuzzleTestCase
+class VerifyCredentialsCommandTest extends \Desk\Testing\UnitTestCase
 {
 
     /**

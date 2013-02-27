@@ -10,7 +10,7 @@ use Guzzle\Service\Client;
 use Guzzle\Service\Command\OperationCommand;
 use Guzzle\Service\Description\ServiceDescription;
 
-class ResponseParserTest extends \Guzzle\Tests\GuzzleTestCase
+class ResponseParserTest extends \Desk\Testing\UnitTestCase
 {
 
     /**

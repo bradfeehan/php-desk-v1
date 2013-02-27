@@ -4,7 +4,7 @@ namespace Desk\Tests\Account;
 
 use Desk\Account\AccountClient;
 
-class AccountClientTest extends \Guzzle\Tests\GuzzleTestCase
+class AccountClientTest extends \Desk\Testing\UnitTestCase
 {
 
     /**

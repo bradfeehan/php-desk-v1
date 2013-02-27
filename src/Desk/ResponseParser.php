@@ -2,13 +2,12 @@
 
 namespace Desk;
 
+use Desk\Model\ModelFactory;
 use Guzzle\Service\Command\AbstractCommand;
 use Guzzle\Service\Command\DefaultResponseParser;
 use Guzzle\Service\Command\OperationResponseParser;
 use Guzzle\Service\Description\OperationInterface;
 use Guzzle\Http\Message\Response;
-use ReflectionClass;
-use UnexpectedValueException;
 
 /**
  * Marshals responses into a class (the operation's "responseClass")
@@ -19,10 +18,9 @@ class ResponseParser extends DefaultResponseParser
 {
 
     /**
-     * @var Desk\ResponseParser
+     * @var Desk\Model\ModelFactory
      */
-    protected static $instance;
-
+    private static $modelFactory;
 
     /**
      * @return Desk\ResponseParser
@@ -30,8 +28,8 @@ class ResponseParser extends DefaultResponseParser
     public static function getInstance()
     {
         // @codeCoverageIgnoreStart
-        if (empty(self::$instance)) {
-            self::$instance = new static();
+        if (!self::$instance) {
+            self::$instance = new static;
         }
         // @codeCoverageIgnoreEnd
 
@@ -53,14 +51,6 @@ class ResponseParser extends DefaultResponseParser
                 ->handleParsing($command, $response, $contentType);
         }
 
-        // Ensure that the requested class implements ResponseClass
-        $reflectionClass = new ReflectionClass($class);
-        $interface = 'Desk\\ResponseClass';
-        if (!$reflectionClass->implementsInterface($interface)) {
-            $message = "Invalid responseClass '$class' (must implement $interface)";
-            throw new UnexpectedValueException($message);
-        }
-
-        return $class::fromResponse($response);
+        return ModelFactory::getInstance()->fromResponse($class, $response);
     }
 }

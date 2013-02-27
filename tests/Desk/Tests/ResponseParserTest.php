@@ -2,7 +2,8 @@
 
 namespace Desk\Tests;
 
-use Desk\ResponseClass;
+use Desk\Model\FromResponse;
+use Desk\Model\ModelFactory;
 use Desk\ResponseParser;
 use Guzzle\Http\Message\Response;
 use Guzzle\Service\Client;
@@ -26,14 +27,13 @@ class ResponseParserTest extends \Guzzle\Tests\GuzzleTestCase
      */
     public function testHandleParsing()
     {
-        $responseClass = 'Desk\\Testing\\MockResponseClass';
-
+        // Prepare input
         $parser = ResponseParser::getInstance();
         $description = ServiceDescription::factory(
             array(
                 'operations' => array(
                     'test' => array(
-                        'responseClass' => $responseClass,
+                        'responseClass' => 'MyClass',
                         'responseType'  => 'class',
                     ),
                 ),
@@ -44,40 +44,20 @@ class ResponseParserTest extends \Guzzle\Tests\GuzzleTestCase
         $command = new OperationCommand(array(), $operation);
         $command->setResponseParser($parser)->setClient(new Client());
 
-        $command->prepare()->setResponse($this->getJsonResponse(), true);
+        $response = \Mockery::mock('Guzzle\\Http\\Message\\Response[]');
+        $command->prepare()->setResponse($response, true);
+
+        // Set up expectations
+        $factory = \Mockery::mock('Desk\\Model\\ModelFactory')
+            ->shouldReceive('fromResponse')->once()
+            ->with('MyClass', $response)
+            ->andReturn('test')
+            ->mock();
+
+        ModelFactory::setInstance($factory);
 
         $result = $command->execute();
-        $this->assertInstanceOf('Desk\\ResponseClass', $result);
-    }
-
-    /**
-     * @covers Desk\ResponseParser::handleParsing
-     * @expectedException UnexpectedValueException
-     */
-    public function testHandleParsingThrowsExceptionForWrongClass()
-    {
-        $responseClass = 'stdClass';
-
-        $parser = ResponseParser::getInstance();
-        $description = ServiceDescription::factory(
-            array(
-                'operations' => array(
-                    'test' => array(
-                        'responseClass' => $responseClass,
-                        'responseType'  => 'class',
-                    ),
-                ),
-            )
-        );
-
-        $operation = $description->getOperation('test');
-        $command = new OperationCommand(array(), $operation);
-        $command->setResponseParser($parser)->setClient(new Client());
-
-        $command->prepare()->setResponse($this->getJsonResponse(), true);
-
-        $result = $command->execute();
-        $this->assertInstanceOf('Desk\\ResponseClass', $result);
+        $this->assertSame('test', $result);
     }
 
     /**

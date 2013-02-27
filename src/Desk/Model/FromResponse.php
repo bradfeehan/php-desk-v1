@@ -1,18 +1,18 @@
 <?php
 
-namespace Desk;
+namespace Desk\Model;
 
 use Guzzle\Http\Message\Response;
 
-interface ResponseClass
+interface FromResponse
 {
 
     /**
-     * Creates an instance of this class from a Response object
+     * Creates an instance of this model from a Guzzle Response object
      *
      * @param Guzzle\Http\Message\Response $response
      *
-     * @return Desk\ClassResponse
+     * @return Desk\Model\FromResponse
      */
     public static function fromResponse(Response $response);
 }

@@ -118,6 +118,7 @@ abstract class AbstractClient extends \Guzzle\Service\Client
     public function getCommand($name, array $args = array())
     {
         return parent::getCommand($name, $args)
+            ->setRequestSerializer(RequestSerializer::getInstance())
             ->setResponseParser(ResponseParser::getInstance());
     }
 }

@@ -9,32 +9,186 @@
 			"responseType": "class",
 			"responseClass": "Desk\\Cases\\Model\\CaseArray",
 			"parameters": {
-				"name":             {"location": "query"},
-				"first_name":       {"location": "query"},
-				"last_name":        {"location": "query"},
-				"email":            {"location": "query"},
-				"phone":            {"location": "query"},
-				"company":          {"location": "query"},
-				"twitter":          {"location": "query"},
-				"labels":           {"location": "query"},
-				"case_id":          {"location": "query"},
-				"subject":          {"location": "query"},
-				"description":      {"location": "query"},
-				"status":           {"location": "query"},
-				"priority":         {"location": "query"},
-				"assigned_group":   {"location": "query"},
-				"assigned_user":    {"location": "query"},
-				"channels":         {"location": "query"},
-				"notes":            {"location": "query"},
-				"attachments":      {"location": "query"},
-				"created":          {"location": "query"},
-				"updated":          {"location": "query"},
-				"since_created_at": {"location": "query"},
-				"max_created_at":   {"location": "query"},
-				"since_updated_at": {"location": "query"},
-				"max_updated_at":   {"location": "query"},
-				"since_id":         {"location": "query"},
-				"max_id":           {"location": "query"}
+				"name": {
+					"description": "Customer name(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": ["string", "numeric"]
+					}
+				},
+				"first_name": {
+					"description": "Customer first name(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": ["string", "numeric"]
+					}
+				},
+				"last_name": {
+					"description": "Customer last name(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": ["string", "numeric"]
+					}
+				},
+				"email": {
+					"description": "Customer email address(es)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string",
+						"pattern": "/.+@.+/"
+					}
+				},
+				"phone": {
+					"description": "Customer phone number(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": ["string", "numeric"]
+					}
+				},
+				"company": {
+					"description": "Customer company name(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": ["string", "numeric"]
+					}
+				},
+				"twitter": {
+					"description": "Customer Twitter screenname(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"labels": {
+					"description": "Case label(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": ["string", "numeric"]
+					}
+				},
+				"case_id": {
+					"description": "Case ID(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "integer"
+					}
+				},
+				"subject": {
+					"description": "Case subject",
+					"location": "query",
+					"type": ["string", "numeric"]
+				},
+				"description": {
+					"description": "Case description",
+					"location": "query",
+					"type": ["string", "numeric"]
+				},
+				"status": {
+					"description": "Case status(es)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": ["new", "open", "pending", "resolved", "closed"]
+					}
+				},
+				"priority": {
+					"description": "Case priority(ies), between 1 and 10",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "integer",
+						"minimum": 1,
+						"maximum": 10
+					}
+				},
+				"assigned_group": {
+					"description": "Case assigned group",
+					"location": "query"
+				},
+				"assigned_user": {
+					"description": "Case assigned user ('me', 'none', 'unassigned', or name of agent)",
+					"location": "query",
+					"type": "string"
+				},
+				"channels": {
+					"description": "Channel types ('email', 'twitter', 'chat', 'callback', 'phone')",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": ["email", "twitter", "chat", "callback", "phone"]
+					}
+				},
+				"notes": {
+					"description": "Case notes",
+					"location": "query"
+				},
+				"attachments": {
+					"description": "Case attachment filename",
+					"location": "query"
+				},
+				"created": {
+					"description": "Case created ('today', 'yesterday', 'week', 'month', 'year')",
+					"location": "query",
+					"type": "string",
+					"enum": ["today", "yesterday", "week", "month", "year"]
+				},
+				"updated": {
+					"description": "Case updated ('today', 'yesterday', 'week', 'month', 'year')",
+					"location": "query",
+					"type": "string",
+					"enum": ["today", "yesterday", "week", "month", "year"]
+				},
+				"since_created_at": {
+					"description": "Returns results with a creation date (in Unix time) greater than (that is, more recent than) the specified date",
+					"location": "query",
+					"format": "timestamp"
+				},
+				"max_created_at": {
+					"description": "Returns results with a creation date (in Unix time) less than (that is, older than) or equal to the specified date",
+					"location": "query",
+					"format": "timestamp"
+				},
+				"since_updated_at": {
+					"description": "Returns results with an update date (in Unix time) greater than (that is, more recent than) the specified date",
+					"location": "query",
+					"format": "timestamp"
+				},
+				"max_updated_at": {
+					"description": "Returns results with an update date (in Unix time) less than (that is, older than) or equal to the specified date",
+					"location": "query",
+					"format": "timestamp"
+				},
+				"since_id": {
+					"description": "Returns results with an ID greater than (that is, more recent than) the specified ID",
+					"location": "query",
+					"type": "integer"
+				},
+				"max_id": {
+					"description": "Returns results with an ID less than (that is, older than) or equal to the specified ID",
+					"location": "query",
+					"type": "integer"
+				},
+				"count": {
+					"description": "Specifies the number of records to retrieve (may not be greater than 100)",
+					"location": "query",
+					"type": "integer"
+				},
+				"page": {
+					"description": "Specifies the page of results to retrieve (note: there are pagination limits -- see the FAQ for details)",
+					"location": "query",
+					"type": "integer"
+				}
 			}
 		}
 	}

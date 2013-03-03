@@ -2,6 +2,7 @@
 
 namespace Desk;
 
+use Desk\PreValidator;
 use Desk\ResponseParser;
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Oauth\OauthPlugin;
@@ -48,6 +49,8 @@ abstract class AbstractClient extends \Guzzle\Service\Client
 
         self::addServiceDescription($client);
         self::addOAuthPlugin($client, $config);
+
+        $client->addSubscriber(new PreValidator());
 
         return $client;
     }

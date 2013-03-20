@@ -9,7 +9,7 @@ class CaseModelTest extends \Desk\Testing\UnitTestCase
 
     public function testFromData()
     {
-        $case = CaseModel::fromData(array('foo' => 'bar'));
+        $case = new CaseModel(array('foo' => 'bar'));
         $this->assertInstanceOf('Desk\\Cases\\Model\\CaseModel', $case);
         $this->assertSame('bar', $case->get('foo'));
     }

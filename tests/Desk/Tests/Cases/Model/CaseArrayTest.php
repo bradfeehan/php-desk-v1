@@ -3,15 +3,14 @@
 namespace Desk\Tests\Cases\Model;
 
 use Desk\Cases\Model\CaseArray;
-use Desk\Model\ModelFactory;
 
 class CaseArrayTest extends \Desk\Testing\UnitTestCase
 {
 
     /**
-     * @covers Desk\Cases\Model\CaseArray::fromResponse
+     * @covers Desk\Cases\Model\CaseArray::fromCommand
      */
-    public function testFromResponse()
+    public function testFromCommand()
     {
         $data = array(
             'results' => array(
@@ -20,34 +19,29 @@ class CaseArrayTest extends \Desk\Testing\UnitTestCase
             ),
         );
 
-        $response = \Mockery::mock('Guzzle\\Http\\Message\\Response')
-            ->shouldReceive('json')
-            ->andReturn($data)
-            ->mock();
+        $command = \Mockery::mock(
+            'Guzzle\\Service\\Command\\OperationCommand',
+            array(
+                'getResponse' => \Mockery::mock(
+                    'Guzzle\\Http\\Message\\Response',
+                    array('json' => $data)
+                ),
+            )
+        );
 
-        $factory = \Mockery::mock('Desk\\Model\\ModelFactory');
-        $factory
-            ->shouldReceive('fromData')->once()
-            ->with('Desk\\Cases\\Model\\CaseModel', $data['results'][0]['case'])
-            ->andReturn('case1');
-        $factory
-            ->shouldReceive('fromData')->once()
-            ->with('Desk\\Cases\\Model\\CaseModel', $data['results'][1]['case'])
-            ->andReturn('case2');
-
-        ModelFactory::setInstance($factory);
-
-        $cases = CaseArray::fromResponse($response);
+        $cases = CaseArray::fromCommand($command);
         $this->assertSame(2, count($cases), 'Wrong number of cases returned');
-        $this->assertContains('case1', $cases);
-        $this->assertContains('case2', $cases);
+
+        foreach ($cases as $case) {
+            $this->assertInstanceOf('Desk\\Cases\\Model\\CaseModel', $case);
+        }
     }
 
     /**
-     * @covers Desk\Cases\Model\CaseArray::fromResponse
+     * @covers Desk\Cases\Model\CaseArray::fromCommand
      * @expectedException UnexpectedValueException
      */
-    public function testFromResponseThrowsExceptionForInvalidFormat()
+    public function testFromCommandThrowsExceptionForInvalidFormat()
     {
         $data = array('foo' => 'bar');
 
@@ -56,6 +50,19 @@ class CaseArrayTest extends \Desk\Testing\UnitTestCase
             array('json' => $data, 'getBody' => json_encode($data))
         );
 
-        CaseArray::fromResponse($response);
+        $command = \Mockery::mock(
+            'Guzzle\\Service\\Command\\OperationCommand',
+            array(
+                'getResponse' => \Mockery::mock(
+                    'Guzzle\\Http\\Message\\Response',
+                    array(
+                        'json' => $data,
+                        'getBody' => json_encode($data),
+                    )
+                ),
+            )
+        );
+
+        CaseArray::fromCommand($command);
     }
 }

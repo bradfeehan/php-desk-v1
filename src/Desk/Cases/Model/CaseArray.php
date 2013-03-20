@@ -2,23 +2,19 @@
 
 namespace Desk\Cases\Model;
 
-use Desk\Model\FromResponse;
-use Desk\Model\ModelFactory;
-use Guzzle\Http\Message\Response;
+use Guzzle\Service\Command\OperationCommand;
+use Guzzle\Service\Command\ResponseClassInterface;
 use UnexpectedValueException;
 
-class CaseArray implements FromResponse
+class CaseArray implements ResponseClassInterface
 {
 
     /**
-     * Creates an array of CaseModels from a Guzzle response
-     *
-     * @param Guzzle\Http\Message\Response $response Guzzle Response
-     *
-     * @return array An array of Desk\Case\Model\CaseModel objects
+     * {@inheritdoc}
      */
-    public static function fromResponse(Response $response)
+    public static function fromCommand(OperationCommand $command)
     {
+        $response = $command->getResponse();
         $content = $response->json();
 
         // ensure the results element exists
@@ -29,9 +25,9 @@ class CaseArray implements FromResponse
         }
 
         $cases = array();
+
         foreach ((array) $content['results'] as $result) {
-            $cases[] = ModelFactory::getInstance()
-                ->fromData('Desk\\Cases\\Model\\CaseModel', $result['case']);
+            $cases[] = new CaseModel($result['case']);
         }
 
         return $cases;

@@ -65,6 +65,6 @@ class AccountClientTest extends \Desk\Testing\UnitTestCase
         $client->setCommandFactory($commandFactory);
 
         $result = $client->getCommand('test');
-        $this->assertInstanceOf('Desk\\ResponseParser', $result->getResponseParser());
+        $this->assertInstanceOf('Desk\\RequestSerializer', $result->getRequestSerializer());
     }
 }

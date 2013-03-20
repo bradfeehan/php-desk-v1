@@ -3,7 +3,6 @@
 namespace Desk;
 
 use Desk\PreValidator;
-use Desk\ResponseParser;
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Service\Description\ServiceDescription;
@@ -116,12 +115,11 @@ abstract class AbstractClient extends \Guzzle\Service\Client
     abstract protected static function getDirectory();
 
     /*
-     * Overridden to use a custom response parser for each command.
+     * Overridden to use a custom request serializer for each command.
      */
     public function getCommand($name, array $args = array())
     {
         return parent::getCommand($name, $args)
-            ->setRequestSerializer(RequestSerializer::getInstance())
-            ->setResponseParser(ResponseParser::getInstance());
+            ->setRequestSerializer(RequestSerializer::getInstance());
     }
 }

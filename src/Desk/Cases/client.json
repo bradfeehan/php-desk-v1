@@ -191,6 +191,26 @@
 					"type": "integer"
 				}
 			}
+		},
+		"GetCase": {
+			"summary": "Retrieve a case by ID (either Desk ID or external ID)",
+			"httpMethod": "GET",
+			"uri": "cases/{id}.json",
+			"responseType": "class",
+			"responseClass": "Desk\\Cases\\Model\\CaseModel",
+			"parameters": {
+				"id": {
+					"description": "Case ID to retrieve",
+					"location": "uri",
+					"type": "integer"
+				},
+				"by": {
+					"description": "Specify which field to find the case by, either 'id' or 'external_id' (defaults to 'id' if omitted)",
+					"location": "query",
+					"type": "string",
+					"enum": ["id", "external_id"]
+				}
+			}
 		}
 	}
 }

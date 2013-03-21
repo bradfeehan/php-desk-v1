@@ -2,35 +2,15 @@
 
 namespace Desk\Tests\Cases\Command;
 
-class GetCasesCommandTest extends \Desk\Testing\UnitTestCase
+class GetCasesCommandTest extends \Desk\Testing\OperationTestCase
 {
 
-    /**
-     * @coversNothing
-     * @dataProvider dataParameter
-     *
-     * @param string $name       Parameter name
-     * @param mixed  $value      Value to set the parameter to
-     * @param string $queryRegex A regex to apply against the resulting
-     *                           request object's query string (optional).
-     *                           If omitted, this test just asserts that
-     *                           the request is created correctly.
-     */
-    public function testParameter($name, $value, $queryRegex = null)
-    {
-        $request = $this->getServiceBuilder()->get('test.cases')
-            ->getCommand('GetCases', array($name => $value))
-            ->prepare();
+    protected $client = 'mock.cases';
 
-        $requestInterface = 'Guzzle\\Http\\Message\\RequestInterface';
-        $this->assertInstanceOf($requestInterface, $request);
+    protected $operation = 'GetCases';
 
-        if ($queryRegex !== null) {
-            $this->assertRegExp($queryRegex, (string) $request->getQuery());
-        }
-    }
 
-    public function dataParameter()
+    public function dataParameterValid()
     {
         return array(
             array('name', 'Test Name', '/name=Test%20Name/'),
@@ -55,18 +35,6 @@ class GetCasesCommandTest extends \Desk\Testing\UnitTestCase
             array('max_updated_at', '2013-03-04 10:03am'),
             array('max_id', 22),
         );
-    }
-
-    /**
-     * @coversNothing
-     * @dataProvider dataParameterInvalid
-     * @expectedException Guzzle\Service\Exception\ValidationException
-     */
-    public function testParameterInvalid($name, $value)
-    {
-        $this->getServiceBuilder()->get('test.cases')
-            ->getCommand('GetCases', array($name => $value))
-            ->prepare();
     }
 
     public function dataParameterInvalid()

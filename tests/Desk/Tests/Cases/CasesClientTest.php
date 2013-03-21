@@ -20,7 +20,7 @@ class CasesClientTest extends \Desk\Testing\UnitTestCase
 
     /**
      * @covers Desk\Cases\CasesClient::getServiceDescriptionFilename
-     * @covers Desk\Cases\CasesClient::getDirectory
+     * @covers Desk\Cases\CasesClient::getChildClassDirectory
      */
     public function testGetServiceDescriptionFilename()
     {

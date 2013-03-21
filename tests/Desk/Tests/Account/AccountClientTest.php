@@ -40,7 +40,7 @@ class AccountClientTest extends \Desk\Testing\UnitTestCase
 
     /**
      * @covers Desk\Account\AccountClient::getServiceDescriptionFilename
-     * @covers Desk\Account\AccountClient::getDirectory
+     * @covers Desk\Account\AccountClient::getChildClassDirectory
      */
     public function testGetServiceDescriptionFilename()
     {

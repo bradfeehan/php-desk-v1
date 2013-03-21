@@ -6,6 +6,7 @@ use Desk\PreValidator;
 use Guzzle\Common\Collection;
 use Guzzle\Plugin\Oauth\OauthPlugin;
 use Guzzle\Service\Description\ServiceDescription;
+use ReflectionClass;
 
 /**
  * Abstract base client class for Desk API
@@ -102,17 +103,21 @@ abstract class AbstractClient extends \Guzzle\Service\Client
      */
     public static function getServiceDescriptionFilename()
     {
-        return static::getDirectory() . '/client.json';
+        return static::getChildClassDirectory() . '/client.json';
     }
 
     /**
-     * Returns the directory of the concrete class
-     *
-     * This should just "return __DIR__;" in descendant classes.
+     * Returns the directory of the concrete child class
      *
      * @return string
      */
-    abstract protected static function getDirectory();
+    private static function getChildClassDirectory()
+    {
+        $className = get_called_class();
+        $reflector = new ReflectionClass($className);
+
+        return dirname($reflector->getFileName());
+    }
 
     /*
      * Overridden to use a custom request serializer for each command.

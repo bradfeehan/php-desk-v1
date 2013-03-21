@@ -9,12 +9,4 @@ use Desk\AbstractClient;
  */
 class CasesClient extends AbstractClient
 {
-
-    /**
-     * {@inheritdoc}
-     */
-    protected static function getDirectory()
-    {
-        return __DIR__;
-    }
 }

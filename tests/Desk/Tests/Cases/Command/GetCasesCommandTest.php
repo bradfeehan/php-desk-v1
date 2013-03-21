@@ -78,6 +78,7 @@ class GetCasesCommandTest extends \Desk\Testing\UnitTestCase
             array('email', 'invalid_e-mail_address'),
             array('case_id', array('foobar')),
             array('case_id', 'foobar'),
+            array('case_id', -43),
             array('status', array('bar-baz')),
             array('status', array('open', 'bar-baz')),
             array('status', 'bar-baz'),

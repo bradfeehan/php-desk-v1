@@ -3,6 +3,9 @@
 use Desk\Testing\UnitTestCase;
 use Guzzle\Service\Builder\ServiceBuilder;
 
+// report on absolutely any PHP error/warning/notice/etc.
+error_reporting(-1);
+
 $ds = DIRECTORY_SEPARATOR;
 
 // Ensure that composer has installed all dependencies

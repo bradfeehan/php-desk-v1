@@ -1,8 +1,7 @@
-php-desk
+php-desk [![Build Status](https://travis-ci.org/bradfeehan/php-desk.png?branch=master)](https://travis-ci.org/bradfeehan/php-desk)
 ========
 
 PHP client for [Desk.com](http://desk.com) API, based on [Guzzle](http://guzzlephp.org)
-
 
 Getting Started
 ---------------

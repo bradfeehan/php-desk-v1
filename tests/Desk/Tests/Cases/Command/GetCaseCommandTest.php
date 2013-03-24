@@ -13,9 +13,17 @@ class GetCaseCommandTest extends \Desk\Testing\OperationTestCase
     public function dataParameterValid()
     {
         return array(
-            array(array('id' => 44)),
-            array(array('by' => 'id')),
-            array(array('by' => 'external_id')),
+            array(array(
+                'id' => 44,
+            )),
+            array(array(
+                'id' => 54,
+                'by' => 'id',
+            )),
+            array(array(
+                'id' => 23,
+                'by' => 'external_id',
+            )),
         );
     }
 
@@ -29,6 +37,8 @@ class GetCaseCommandTest extends \Desk\Testing\OperationTestCase
             array(array('id' => '6.28')),
             array(array('id' => '-8.8')),
             array(array('id' => 'not a number')),
+            array(array('by' => 'id')),
+            array(array('by' => 'external_id')),
         );
     }
 }

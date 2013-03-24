@@ -201,6 +201,7 @@
 			"parameters": {
 				"id": {
 					"description": "Case ID to retrieve",
+					"required": true,
 					"location": "uri",
 					"type": "integer"
 				},

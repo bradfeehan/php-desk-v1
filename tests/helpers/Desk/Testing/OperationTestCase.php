@@ -62,17 +62,16 @@ abstract class OperationTestCase extends UnitTestCase
      * @coversNothing
      * @dataProvider dataParameterValid
      *
-     * @param string $name       Parameter name
-     * @param mixed  $value      Value to set the parameter to
+     * @param array  $parameters Parameter names => parameter values
      * @param string $queryRegex A regex to apply against the resulting
      *                           request object's query string (optional).
      *                           If omitted, this test just asserts that
      *                           the request is created correctly.
      */
-    public function testParameterValid($name, $value, $queryRegex = null)
+    public function testParameterValid($parameters, $queryRegex = null)
     {
         $request = $this->getServiceBuilder()->get($this->getClientName())
-            ->getCommand($this->getOperationName(), array($name => $value))
+            ->getCommand($this->getOperationName(), $parameters)
             ->prepare();
 
         $requestInterface = 'Guzzle\\Http\\Message\\RequestInterface';
@@ -88,10 +87,10 @@ abstract class OperationTestCase extends UnitTestCase
      * @dataProvider dataParameterInvalid
      * @expectedException Guzzle\Service\Exception\ValidationException
      */
-    public function testParameterInvalid($name, $value)
+    public function testParameterInvalid($parameters)
     {
         $this->getServiceBuilder()->get($this->getClientName())
-            ->getCommand($this->getOperationName(), array($name => $value))
+            ->getCommand($this->getOperationName(), $parameters)
             ->prepare();
     }
 

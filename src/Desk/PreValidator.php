@@ -50,7 +50,7 @@ class PreValidator implements EventSubscriberInterface
 
                 // Wrap the value as the only element in an array if
                 // it's still not an array
-                if (!is_array($value)) {
+                if (!is_null($value) && !is_array($value)) {
                     $command->set($name, array($value));
                 }
             }

@@ -45,7 +45,9 @@ class PreValidatorTest extends \Desk\Testing\UnitTestCase
         return array(
             array(
                 $this->command(
+                    // service description
                     array(
+                        // "foo" parameter must be array of integers
                         'foo' => array(
                             'name' => 'foo',
                             'type' => 'array',
@@ -54,13 +56,17 @@ class PreValidatorTest extends \Desk\Testing\UnitTestCase
                             ),
                         ),
                     ),
+                    // Set "foo" to a bare integer (not in an array)
                     array('foo' => 36)
                 ),
-                array(36), // expected
+                // Expected result: should be wrapped in an array
+                array(36),
             ),
             array(
                 $this->command(
+                    // service description
                     array(
+                        // "foo" parameter must be array of integers
                         'foo' => array(
                             'name' => 'foo',
                             'type' => 'array',
@@ -69,6 +75,7 @@ class PreValidatorTest extends \Desk\Testing\UnitTestCase
                             ),
                         ),
                     ),
+                    // Set "foo" to object implementing ToArrayInterface
                     array(
                         'foo' => \Mockery::mock(
                             'Guzzle\\Common\\ToArrayInterface',
@@ -76,7 +83,27 @@ class PreValidatorTest extends \Desk\Testing\UnitTestCase
                         ),
                     )
                 ),
-                array(45), // expected
+                // Expected result: value of object's toArray() function
+                array(45),
+            ),
+            array(
+                $this->command(
+                    // service description
+                    array(
+                        // "foo" parameter must be array of integers
+                        'foo' => array(
+                            'name' => 'foo',
+                            'type' => 'array',
+                            'items' => array(
+                                'type' => 'integer',
+                            ),
+                        ),
+                    ),
+                    // Set no parameters in constructor
+                    array()
+                ),
+                // Expected result: "foo" parameter not set (is NULL)
+                null,
             ),
         );
     }

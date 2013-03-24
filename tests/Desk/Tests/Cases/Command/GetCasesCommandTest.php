@@ -69,7 +69,7 @@ class GetCasesCommandTest extends \Desk\Testing\OperationTestCase
      */
     public function testSystem()
     {
-        $client = $this->getServiceBuilder()->get('mock.cases');
+        $client = $this->client();
         $this->setMockResponse($client, 'success');
         $cases = $client->GetCases();
 
@@ -86,7 +86,7 @@ class GetCasesCommandTest extends \Desk\Testing\OperationTestCase
      */
     public function testSystemWithInvalidSchemaResponse()
     {
-        $client = $this->getServiceBuilder()->get('mock.cases');
+        $client = $this->client();
         $this->setMockResponse($client, 'invalid-schema');
         $client->GetCases();
     }

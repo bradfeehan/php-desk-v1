@@ -59,6 +59,16 @@ abstract class OperationTestCase extends UnitTestCase
     }
 
     /**
+     * Gets the client specified in self::getClientName()
+     *
+     * @return Guzzle\Service\Client
+     */
+    final public function client()
+    {
+        return $this->getServiceBuilder()->get($this->getClientName());
+    }
+
+    /**
      * @coversNothing
      * @dataProvider dataParameterValid
      *
@@ -70,7 +80,7 @@ abstract class OperationTestCase extends UnitTestCase
      */
     public function testParameterValid($parameters, $queryRegex = null)
     {
-        $request = $this->getServiceBuilder()->get($this->getClientName())
+        $request = $this->client()
             ->getCommand($this->getOperationName(), $parameters)
             ->prepare();
 
@@ -89,7 +99,7 @@ abstract class OperationTestCase extends UnitTestCase
      */
     public function testParameterInvalid($parameters)
     {
-        $this->getServiceBuilder()->get($this->getClientName())
+        $this->client()
             ->getCommand($this->getOperationName(), $parameters)
             ->prepare();
     }

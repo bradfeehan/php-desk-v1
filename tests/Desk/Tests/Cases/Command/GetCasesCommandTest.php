@@ -90,4 +90,21 @@ class GetCasesCommandTest extends \Desk\Testing\OperationTestCase
         $this->setMockResponse($client, 'invalid-schema');
         $client->GetCases();
     }
+
+    /**
+     * @group network
+     * @coversNothing
+     */
+    public function testNetwork()
+    {
+        $client = $this->getServiceBuilder()->get('test.cases');
+        $cases = $client->GetCases();
+
+        $this->assertInternalType('array', $cases);
+
+        // If no cases returned, the foreach will be skipped
+        foreach ($cases as $case) {
+            $this->assertInstanceOf('Desk\\Cases\\Model\\CaseModel', $case);
+        }
+    }
 }

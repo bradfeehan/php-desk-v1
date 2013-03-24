@@ -203,7 +203,8 @@
 					"description": "Case ID to retrieve",
 					"required": true,
 					"location": "uri",
-					"type": "integer"
+					"type": ["string", "numeric"],
+					"maxLength": 64
 				},
 				"by": {
 					"description": "Specify which field to find the case by, either 'id' or 'external_id' (defaults to 'id' if omitted)",

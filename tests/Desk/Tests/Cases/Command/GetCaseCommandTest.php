@@ -30,13 +30,9 @@ class GetCaseCommandTest extends \Desk\Testing\OperationTestCase
     public function dataParameterInvalid()
     {
         return array(
-            array(array('id' => 3.14)),
-            array(array('id' => -3.2)),
-            array(array('id' => '90')),
-            array(array('id' => '-33')),
-            array(array('id' => '6.28')),
-            array(array('id' => '-8.8')),
-            array(array('id' => 'not a number')),
+            array(array('id' => false)),
+            array(array('id' => null)),
+            array(array('id' => new \stdClass())),
             array(array('by' => 'id')),
             array(array('by' => 'external_id')),
         );

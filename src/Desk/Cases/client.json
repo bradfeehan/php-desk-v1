@@ -14,7 +14,7 @@
 					"location": "query",
 					"type": "array",
 					"items": {
-						"type": ["string", "numeric"]
+						"type": "string"
 					}
 				},
 				"first_name": {
@@ -22,7 +22,7 @@
 					"location": "query",
 					"type": "array",
 					"items": {
-						"type": ["string", "numeric"]
+						"type": "string"
 					}
 				},
 				"last_name": {
@@ -30,7 +30,7 @@
 					"location": "query",
 					"type": "array",
 					"items": {
-						"type": ["string", "numeric"]
+						"type": "string"
 					}
 				},
 				"email": {
@@ -47,7 +47,7 @@
 					"location": "query",
 					"type": "array",
 					"items": {
-						"type": ["string", "numeric"]
+						"type": "string"
 					}
 				},
 				"company": {
@@ -55,7 +55,7 @@
 					"location": "query",
 					"type": "array",
 					"items": {
-						"type": ["string", "numeric"]
+						"type": "string"
 					}
 				},
 				"twitter": {
@@ -71,7 +71,7 @@
 					"location": "query",
 					"type": "array",
 					"items": {
-						"type": ["string", "numeric"]
+						"type": "string"
 					}
 				},
 				"case_id": {
@@ -86,12 +86,12 @@
 				"subject": {
 					"description": "Case subject",
 					"location": "query",
-					"type": ["string", "numeric"]
+					"type": "string"
 				},
 				"description": {
 					"description": "Case description",
 					"location": "query",
-					"type": ["string", "numeric"]
+					"type": "string"
 				},
 				"status": {
 					"description": "Case status(es)",
@@ -203,7 +203,7 @@
 					"description": "Case ID to retrieve",
 					"required": true,
 					"location": "uri",
-					"type": ["string", "numeric"],
+					"type": "string",
 					"maxLength": 64
 				},
 				"by": {

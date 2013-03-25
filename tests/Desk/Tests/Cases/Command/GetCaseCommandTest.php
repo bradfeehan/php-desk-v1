@@ -37,4 +37,17 @@ class GetCaseCommandTest extends \Desk\Testing\OperationTestCase
             array(array('by' => 'external_id')),
         );
     }
+
+    /**
+     * @coversNothing
+     */
+    public function testSystem()
+    {
+        $client = $this->client();
+        $this->setMockResponse($client, 'success');
+        $case = $client->GetCase(array('id' => 1));
+
+        $this->assertInstanceOf('Desk\\Cases\\Model\\CaseModel', $case);
+        $this->assertSame('email', $case->get('channel'));
+    }
 }

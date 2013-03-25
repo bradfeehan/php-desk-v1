@@ -213,6 +213,80 @@
 					"enum": ["id", "external_id"]
 				}
 			}
+		},
+		"UpdateCase": {
+			"summary": "Update an existing case",
+			"httpMethod": "PUT",
+			"uri": "cases/{id}.json",
+			"responseType": "Desk\\Cases\\Model\\CaseModel",
+			"parameters": {
+				"id": {
+					"description": "Case ID to update",
+					"required": true,
+					"location": "uri",
+					"type": "integer",
+					"minimum": 1
+				},
+				"subject": {
+					"description": "Case subject",
+					"location": "query",
+					"type": "string"
+				},
+				"external_id": {
+					"description": "The case's external ID",
+					"location": "query",
+					"type": "string",
+					"maxLength": 64
+				},
+				"description": {
+					"description": "Case description",
+					"location": "query",
+					"type": "string"
+				},
+				"priority": {
+					"description": "Case priority, between 1 and 10",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "integer",
+						"minimum": 1,
+						"maximum": 10
+					}
+				},
+				"labels": {
+					"description": "Case label(s) (any existing labels that are not specified will be removed, and any new labels will be added)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"status": {
+					"description": "Case status",
+					"location": "query",
+					"type": "string",
+					"enum": ["new", "open", "pending", "resolved", "closed"],
+					"sentAs": "case_status_type_id",
+					"filters": ["Desk\\Cases\\CasesClient::getCaseStatus"]
+				},
+				"user_id": {
+					"description": "The case's assigned user ID",
+					"location": "query",
+					"type": "integer",
+					"minimum": 1
+				},
+				"group_id": {
+					"description": "The case's assigned group ID",
+					"location": "query",
+					"type": "integer",
+					"minimum": 1
+				},
+				"language": {
+					"description": "The case's language (only accepted if multi-language support is turned on for the site and the language is enabled in Admin)",
+					"location": "query",
+					"type": "string"
+				}
+			}
 		}
 	}
 }

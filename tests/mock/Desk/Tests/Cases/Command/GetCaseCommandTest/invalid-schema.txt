@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: must-revalidate, private, max-age=0
+Content-Type: application/json; charset=utf-8
+Date: Wed, 27 Feb 2013 10:18:45 GMT
+ETag: "f9c169afe5edb8991f3bc1866a5d9d73"
+Status: 200
+Content-Length: 1330
+Connection: keep-alive
+
+{"wrong_key": {"id": 1,"external_id": null,"last_available_at": "2011-09-05T15:28:50+10:00","created_at": "2011-08-31T11:31:25+10:00","active_at": "2011-09-05T15:28:29+10:00","route_at": "2011-08-31T11:31:25+10:00","first_resolved_at": "2011-09-09T09:20:59+10:00","active_user": null,"updated_at": "2011-09-09T09:20:59+10:00","case_status_at": "2011-09-09T09:20:59+10:00","priority": 4,"last_saved_by_id": null,"interaction_in_at": "2011-08-31T11:31:28+10:00","assigned_at": "2011-08-31T11:31:25+10:00","subject": "Lorem ipsum dolor","routed_at": null,"group": {"id": 10000,"name": "General"},"user": {"id": 1000001,"name": "John Smith"},"first_opened_at": "2011-08-31T11:35:14+10:00","channel": "email","resolved_at": "2011-09-09T09:20:59+10:00","description": null,"customer_id": 1000001,"closed_at": null,"changed_at": "2011-09-09T09:20:59+10:00","case_status_type": "resolved","labels": "Example","pending_at": null,"opened_at": "2011-08-31T11:35:14+10:00","route_status": "available","thread_count": 1,"note_count": 0,"preview": "sit amet, consectetur adipiscing elit. Integer velit nulla, tincidunt id consequat et, dignissim vitae dui. Aliquam vel odio porttitor turpis cursus aliquam. Proin vitae lorem sapien, venenatis rhoncus mauris. Fusce vel enim turpis. Morbi sapien mi","macros": null,"articles": null,"language": null}}

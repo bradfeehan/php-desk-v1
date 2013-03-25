@@ -50,4 +50,15 @@ class GetCaseCommandTest extends \Desk\Testing\OperationTestCase
         $this->assertInstanceOf('Desk\\Cases\\Model\\CaseModel', $case);
         $this->assertSame('email', $case->get('channel'));
     }
+
+    /**
+     * @coversNothing
+     * @expectedException UnexpectedValueException
+     */
+    public function testSystemWithInvalidSchemaResponse()
+    {
+        $client = $this->client();
+        $this->setMockResponse($client, 'invalid-schema');
+        $client->GetCase(array('id' => 1));
+    }
 }

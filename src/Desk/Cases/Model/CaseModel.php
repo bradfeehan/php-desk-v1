@@ -5,6 +5,7 @@ namespace Desk\Cases\Model;
 use Guzzle\Common\Collection;
 use Guzzle\Service\Command\OperationCommand;
 use Guzzle\Service\Command\ResponseClassInterface;
+use UnexpectedValueException;
 
 class CaseModel extends Collection implements ResponseClassInterface
 {

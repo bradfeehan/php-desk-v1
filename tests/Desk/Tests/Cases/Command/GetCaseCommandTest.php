@@ -61,4 +61,19 @@ class GetCaseCommandTest extends \Desk\Testing\OperationTestCase
         $this->setMockResponse($client, 'invalid-schema');
         $client->GetCase(array('id' => 1));
     }
+
+    /**
+     * This will fail if there are no cases currently in Desk, as it
+     * attempts to retrieve the first case.
+     *
+     * @group network
+     * @coversNothing
+     */
+    public function testNetwork()
+    {
+        $client = $this->getServiceBuilder()->get('test.cases');
+        $case = $client->GetCase(array('id' => 1));
+        $this->assertInstanceOf('Desk\\Cases\\Model\\CaseModel', $case);
+        $this->assertSame(1, $case->get('id'));
+    }
 }

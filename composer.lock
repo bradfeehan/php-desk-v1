@@ -1,18 +1,18 @@
 {
-    "hash": "2dffb601e28304eaf07e056075c04383",
+    "hash": "aff8ac206e1f6b4790dde3f3b5634c54",
     "packages": [
         {
             "name": "guzzle/guzzle",
-            "version": "v3.3.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "v3.3.1"
+                "reference": "9da0ac2123ee3072078cd9da22e2a1dc3bc5dc49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/v3.3.1",
-                "reference": "v3.3.1",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/9da0ac2123ee3072078cd9da22e2a1dc3bc5dc49",
+                "reference": "9da0ac2123ee3072078cd9da22e2a1dc3bc5dc49",
                 "shasum": ""
             },
             "require": {
@@ -48,6 +48,7 @@
                 "doctrine/cache": "*",
                 "monolog/monolog": "1.*",
                 "phpunit/phpunit": "3.7.*",
+                "psr/log": "1.0.*",
                 "symfony/class-loader": "*",
                 "zend/zend-cache1": "1.12",
                 "zend/zend-log1": "1.12",
@@ -92,7 +93,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2013-03-10 23:05:38"
+            "time": "2013-03-29 06:48:55"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -609,9 +610,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "guzzle/guzzle": 20
+    },
     "platform": {
         "php": ">=5.3"
     },

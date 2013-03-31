@@ -72,13 +72,16 @@ abstract class OperationTestCase extends UnitTestCase
      * @coversNothing
      * @dataProvider dataParameterValid
      *
-     * @param array  $parameters Parameter names => parameter values
-     * @param string $queryRegex A regex to apply against the resulting
-     *                           request object's query string (optional).
-     *                           If omitted, this test just asserts that
-     *                           the request is created correctly.
+     * @param array $parameters Parameter names => parameter values
+     * @param array $assertions Assertions to make after setting value.
+     *    If this parameter is omitted, the test will just assert that
+     *    the request is created correctly. Valid keys include:
+     *     - query:      A regex to apply against the resulting request
+     *                   object's query string.
+     *     - postFields: A regex to apply against the resulting request
+     *                   object's post fields.
      */
-    public function testParameterValid($parameters, $queryRegex = null)
+    public function testParameterValid($parameters, $assertions = null)
     {
         $request = $this->client()
             ->getCommand($this->getOperationName(), $parameters)
@@ -87,8 +90,12 @@ abstract class OperationTestCase extends UnitTestCase
         $requestInterface = 'Guzzle\\Http\\Message\\RequestInterface';
         $this->assertInstanceOf($requestInterface, $request);
 
-        if ($queryRegex !== null) {
-            $this->assertRegExp($queryRegex, (string) $request->getQuery());
+        if (isset($assertions['query'])) {
+            $this->assertRegExp($assertions['query'], (string) $request->getQuery());
+        }
+
+        if (isset($assertions['postFields'])) {
+            $this->assertRegExp($assertions['postFields'], (string) $request->getPostFields());
         }
     }
 

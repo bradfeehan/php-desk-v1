@@ -25,7 +25,7 @@ class UpdateCaseCommandTest extends \Desk\Testing\OperationTestCase
                     'id' => 43,
                     'status' => 'pending',
                 ),
-                '/case_status_type_id=50/',
+                array('postFields' => '/case_status_type_id=50/'),
             ),
         );
     }

@@ -13,9 +13,12 @@ class GetCasesCommandTest extends \Desk\Testing\OperationTestCase
     public function dataParameterValid()
     {
         return array(
-            array(array('name' => 'Test Name', '/name=Test%20Name/')),
-            array(array('first_name' => array('Firstname1', 'Firstname2'), '/first_name=Firstname1,Firstname2/')),
-            array(array('email' => 'test@example.com', '/email=test%40example.com/')),
+            array(array('name' => 'Test Name', array('query' => '/name=Test%20Name/'))),
+            array(
+                array('first_name' => array('Firstname1', 'Firstname2')),
+                array('query' => '/first_name=Firstname1,Firstname2/')
+            ),
+            array(array('email' => 'test@example.com', array('query' => '/email=test%40example.com/'))),
             array(array('case_id' => array(1, 2, 4))),
             array(array('case_id' => 1)),
             array(array('status' => array('open'))),
@@ -29,9 +32,9 @@ class GetCasesCommandTest extends \Desk\Testing\OperationTestCase
             array(array('created' => 'today')),
             array(array('updated' => 'year')),
             array(
-                array('since_created_at' => new \DateTime('2013-03-01 10:03am', new \DateTimeZone('UTC')),
-                '/since_created_at=1362132180/'
-            )),
+                array('since_created_at' => new \DateTime('2013-03-01 10:03am', new \DateTimeZone('UTC'))),
+                array('query' => '/since_created_at=1362132180/')
+            ),
             array(array('max_updated_at' => '2013-03-04 10:03am')),
             array(array('max_id' => 22)),
         );

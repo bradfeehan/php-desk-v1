@@ -229,30 +229,30 @@
 				},
 				"subject": {
 					"description": "Case subject",
-					"location": "query",
+					"location": "postField",
 					"type": "string"
 				},
 				"external_id": {
 					"description": "The case's external ID",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"maxLength": 64
 				},
 				"description": {
 					"description": "Case description",
-					"location": "query",
+					"location": "postField",
 					"type": "string"
 				},
 				"priority": {
 					"description": "Case priority, between 1 and 10",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"minimum": 1,
 					"maximum": 10
 				},
 				"labels": {
 					"description": "Case label(s) (any existing labels that are not specified will be removed, and any new labels will be added)",
-					"location": "query",
+					"location": "postField",
 					"type": "array",
 					"items": {
 						"type": "string"
@@ -260,7 +260,7 @@
 				},
 				"status": {
 					"description": "Case status",
-					"location": "query",
+					"location": "postField",
 					"type": "string",
 					"enum": ["new", "open", "pending", "resolved", "closed"],
 					"sentAs": "case_status_type_id",
@@ -268,19 +268,19 @@
 				},
 				"user_id": {
 					"description": "The case's assigned user ID",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"minimum": 1
 				},
 				"group_id": {
 					"description": "The case's assigned group ID",
-					"location": "query",
+					"location": "postField",
 					"type": "integer",
 					"minimum": 1
 				},
 				"language": {
 					"description": "The case's language (only accepted if multi-language support is turned on for the site and the language is enabled in Admin)",
-					"location": "query",
+					"location": "postField",
 					"type": "string"
 				}
 			}

@@ -246,12 +246,9 @@
 				"priority": {
 					"description": "Case priority, between 1 and 10",
 					"location": "query",
-					"type": "array",
-					"items": {
-						"type": "integer",
-						"minimum": 1,
-						"maximum": 10
-					}
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 10
 				},
 				"labels": {
 					"description": "Case label(s) (any existing labels that are not specified will be removed, and any new labels will be added)",

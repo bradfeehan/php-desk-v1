@@ -42,4 +42,28 @@ class UpdateCaseCommandTest extends \Desk\Testing\OperationTestCase
             )),
         );
     }
+
+    /**
+     * @coversNothing
+     */
+    public function testSystem()
+    {
+        $client = $this->client();
+        $this->setMockResponse($client, 'success');
+        $case = $client->UpdateCase(array('id' => 2, 'priority' => 4));
+
+        $this->assertInstanceOf('Desk\\Cases\\Model\\CaseModel', $case);
+        $this->assertEquals('1000006', $case->get('last_saved_by_id'));
+    }
+
+    /**
+     * @coversNothing
+     * @expectedException Guzzle\Http\Exception\ClientErrorResponseException
+     */
+    public function testErrorOnAttemptUpdateClosedCase()
+    {
+        $client = $this->client();
+        $this->setMockResponse($client, 'attempt-update-closed-case');
+        $client->UpdateCase(array('id' => 1, 'priority' => 4));
+    }
 }

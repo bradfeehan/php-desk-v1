@@ -24,6 +24,7 @@ class CaseModelTest extends \Desk\Testing\UnitTestCase
                     'Guzzle\\Http\\Message\\Response',
                     array('json' => $data)
                 ),
+               'getName' => 'MyCommand',
             )
         );
 
@@ -46,9 +47,35 @@ class CaseModelTest extends \Desk\Testing\UnitTestCase
                     'Guzzle\\Http\\Message\\Response',
                     array('json' => $data, 'getBody' => json_encode($data))
                 ),
+                'getName' => 'MyCommand',
             )
         );
 
         CaseModel::fromCommand($command);
+    }
+
+    /**
+     * @covers Desk\Cases\Model\CaseModel::getCasePath
+     * @dataProvider dataGetCasePath
+     */
+    public function testGetCasePath($commandName, $expected)
+    {
+        $command = \Mockery::mock(
+            'Guzzle\\Service\\Command\\OperationCommand',
+            array(
+                'getName' => $commandName,
+            )
+        );
+
+        $this->assertSame($expected, CaseModel::getCasePath($command));
+    }
+
+    public function dataGetCasePath()
+    {
+        return array(
+            array('GetCase', 'case'),
+            array('UpdateCase', 'results/case'),
+            array('MyCommand', 'case'),
+        );
     }
 }

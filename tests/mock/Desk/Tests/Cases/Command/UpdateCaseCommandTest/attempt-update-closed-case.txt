@@ -1,0 +1,10 @@
+HTTP/1.1 422 Unprocessable Entity
+Accept-Ranges: bytes
+Cache-Control: no-cache
+Content-Type: application/json; charset=utf-8
+Date: Sun, 31 Mar 2013 02:05:25 GMT
+Status: 422
+Content-Length: 56
+Connection: keep-alive
+
+{"errors":["Case is closed.  Unable to apply changes."]}

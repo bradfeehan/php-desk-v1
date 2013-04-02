@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: max-age=0, private, must-revalidate
+Content-Type: application/json; charset=utf-8
+Date: Tue, 02 Apr 2013 04:30:48 GMT
+ETag: "66d1d36a71b843b03a4ed4a4be267f09"
+Status: 200
+Content-Length: 1665
+Connection: keep-alive
+
+{"success":true,"results":{"case":{"active_at":null,"active_user":null,"articles":null,"assigned_at":"2011-09-17T19:56:25+10:00","case_status_at":"2011-09-17T19:56:24+10:00","case_status_type":"new","changed_at":"2013-03-28T16:37:21+11:00","channel":"email","closed_at":null,"created_at":"2011-09-17T19:56:24+10:00","customer_id":1000009,"description":"Phasellus orci ante, pharetra quis aliquam quis, elementum sit amet ipsum. Nunc scelerisque semper lorem nec semper. Proin eleifend egestas sem vitae auctor. Aenean eget ligula ut massa ultricies scelerisque quis nec ligula. Praesent varius consequat scelerisque. Integer non pellentesque nulla. Maecenas non massa turpis.","external_id":null,"first_opened_at":null,"first_resolved_at":null,"group":{"id":10005,"name":"General","created_at":"2011-08-31T11:31:22+10:00","updated_at":"2011-08-31T11:31:22+10:00"},"id":2,"interaction_in_at":"2011-09-17T19:56:25+10:00","labels":["mylabel"],"language":null,"last_available_at":"2011-09-17T19:56:25+10:00","last_saved_by_id":1000006,"macros":null,"note_count":0,"opened_at":null,"pending_at":null,"preview":"Phasellus orci ante, pharetra quis aliquam quis, elementum sit amet ipsum. Nunc scelerisque semper lorem nec semper. Proin eleifend egestas sem vitae auctor. Aenean eget ligula ut massa ultricies scelerisque quis nec ligula. Praesent varius consequat scelerisque. Integer non pellentesque nulla. Maecenas non massa turpis.","priority":4,"resolved_at":null,"route_at":"2011-09-17T19:56:24+10:00","routed_at":null,"route_status":"available","subject":"Duis nulla velit","thread_count":1,"updated_at":"2013-03-28T16:37:21+11:00","user":null,"custom_user":null}}}

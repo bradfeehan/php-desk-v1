@@ -218,7 +218,8 @@
 			"summary": "Update an existing case",
 			"httpMethod": "PUT",
 			"uri": "cases/{id}.json",
-			"responseType": "Desk\\Cases\\Model\\CaseModel",
+			"responseType": "class",
+			"responseClass": "Desk\\Cases\\Model\\CaseModel",
 			"parameters": {
 				"id": {
 					"description": "Case ID to update",

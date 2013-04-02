@@ -2,11 +2,12 @@
 
 namespace Desk\Cases\Model;
 
+use Desk\AbstractModel;
 use Guzzle\Service\Command\OperationCommand;
 use Guzzle\Service\Command\ResponseClassInterface;
 use UnexpectedValueException;
 
-class CaseArray implements ResponseClassInterface
+class CaseArray extends AbstractModel implements ResponseClassInterface
 {
 
     /**
@@ -15,18 +16,14 @@ class CaseArray implements ResponseClassInterface
     public static function fromCommand(OperationCommand $command)
     {
         $response = $command->getResponse();
-        $content = $response->json();
 
-        // ensure the results element exists
-        if (!isset($content['results'])) {
-            $message = "Invalid response format from Desk API. ";
-            $message .= "Full response:\n{$response->getBody()}";
-            throw new UnexpectedValueException($message);
-        }
+        // Make sure "results" key exists
+        $casesData = static::getResponseKey($response, 'results');
 
+        // Build up an array of CaseModel objects from the results
         $cases = array();
 
-        foreach ((array) $content['results'] as $result) {
+        foreach ((array) $casesData as $result) {
             $cases[] = new CaseModel($result['case']);
         }
 

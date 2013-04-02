@@ -16,6 +16,10 @@
 		"mock.cases": {
 			"class": "Desk\\Cases\\CasesClient",
 			"extends": "mock"
+		},
+		"mock.content": {
+			"class": "Desk\\Content\\ContentClient",
+			"extends": "mock"
 		}
 	}
 }

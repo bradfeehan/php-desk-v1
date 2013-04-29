@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: must-revalidate, private, max-age=0
+Content-Type: application/json; charset=utf-8
+Date: Mon, 29 Apr 2013 04:25:37 GMT
+ETag: "f47ac41c40aa647c7ac2e2c95863db25"
+Status: 200
+Content-Length: 632
+Connection: keep-alive
+
+{"results":[{"topic":{"id":6,"name":"Test Topic 6","description":"Test Topic 6 Description","show_in_portal":true,"position":6}},{"topic":{"id":7,"name":"Test Topic 7","description":"Test Topic 7 Description","show_in_portal":true,"position":7}},{"topic":{"id":8,"name":"Test Topic 8","description":"Test Topic 8 Description","show_in_portal":true,"position":8}},{"topic":{"id":9,"name":"Test Topic 9","description":"Test Topic 9 Description","show_in_portal":true,"position":9}},{"topic":{"id":10,"name":"Test Topic 10","description":"Test Topic 10 Description","show_in_portal":true,"position":10}}],"page":2,"count":5,"total":12}

@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: must-revalidate, private, max-age=0
+Content-Type: application/json; charset=utf-8
+Date: Mon, 29 Apr 2013 04:25:37 GMT
+ETag: "f47ac41c40aa647c7ac2e2c95863db25"
+Status: 200
+Content-Length: 285
+Connection: keep-alive
+
+{"results":[{"topic":{"id":11,"name":"Test Topic 11","description":"Test Topic 11 Description","show_in_portal":true,"position":11}},{"topic":{"id":12,"name":"Test Topic 12","description":"Test Topic 12 Description","show_in_portal":true,"position":12}}],"page":3,"count":5,"total":12}

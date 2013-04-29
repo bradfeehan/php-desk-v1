@@ -2,6 +2,32 @@
 	"name": "Content",
 	"description": "Client for Desk content API",
 	"operations": {
+		"CreateTopic": {
+			"summary": "Create a new topic",
+			"httpMethod": "POST",
+			"uri": "topics.json",
+			"responseType": "class",
+			"responseClass": "Desk\\Content\\Model\\TopicModel",
+			"parameters": {
+				"name": {
+					"description": "The name of the topic",
+					"required": true,
+					"location": "postField",
+					"type": "string",
+					"minLength": 1
+				},
+				"description": {
+					"description": "The topic's description",
+					"location": "postField",
+					"type": "string"
+				},
+				"show_in_portal": {
+					"description": "Show the topic in the portal",
+					"location": "postField",
+					"type": "boolean"
+				}
+			}
+		},
 		"GetTopics": {
 			"summary": "Retrieve topics with pagination",
 			"httpMethod": "GET",

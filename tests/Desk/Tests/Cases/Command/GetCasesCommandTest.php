@@ -37,6 +37,9 @@ class GetCasesCommandTest extends \Desk\Testing\OperationTestCase
             ),
             array(array('max_updated_at' => '2013-03-04 10:03am')),
             array(array('max_id' => 22)),
+            array(array('count' => 20)),
+            array(array('count' => 100)),
+            array(array('page' => 12)),
         );
     }
 
@@ -64,6 +67,9 @@ class GetCasesCommandTest extends \Desk\Testing\OperationTestCase
             array(array('created' => array('today'))),
             array(array('updated' => 'not-an-option')),
             array(array('since_id' => array(44))),
+            array(array('count' => -2)),
+            array(array('count' => 101)),
+            array(array('page' => 0)),
         );
     }
 

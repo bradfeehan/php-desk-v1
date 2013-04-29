@@ -181,14 +181,17 @@
 					"type": "integer"
 				},
 				"count": {
-					"description": "Specifies the number of records to retrieve (may not be greater than 100)",
+					"description": "Specifies the number of records to retrieve",
 					"location": "query",
-					"type": "integer"
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 100
 				},
 				"page": {
 					"description": "Specifies the page of results to retrieve (note: there are pagination limits -- see the FAQ for details)",
 					"location": "query",
-					"type": "integer"
+					"type": "integer",
+					"minimum": 1
 				}
 			}
 		},

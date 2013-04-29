@@ -1,4 +1,22 @@
 {
 	"name": "Content",
-	"description": "Client for Desk content API"
+	"description": "Client for Desk content API",
+	"operations": {
+		"GetTopic": {
+			"summary": "Returns a topic by ID",
+			"httpMethod": "GET",
+			"uri": "topics/{id}.json",
+			"responseType": "class",
+			"responseClass": "Desk\\Content\\Model\\TopicModel",
+			"parameters": {
+				"id": {
+					"description": "Topic ID to retrieve",
+					"required": true,
+					"location": "uri",
+					"type": "integer",
+					"minimum": 1
+				}
+			}
+		}
+	}
 }

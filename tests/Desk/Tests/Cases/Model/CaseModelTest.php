@@ -13,18 +13,9 @@ class CaseModelTest extends \Desk\Testing\UnitTestCase
      */
     public function testFromCommand()
     {
-        $data = array(
-            'case' => array('foo' => 'bar'),
-        );
-
-        $command = \Mockery::mock(
-            'Guzzle\\Service\\Command\\OperationCommand',
+        $command = $this->createMockCommand(
             array(
-                'getResponse' => \Mockery::mock(
-                    'Guzzle\\Http\\Message\\Response',
-                    array('json' => $data)
-                ),
-               'getName' => 'MyCommand',
+                'case' => array('foo' => 'bar'),
             )
         );
 
@@ -38,19 +29,7 @@ class CaseModelTest extends \Desk\Testing\UnitTestCase
      */
     public function testFromCommandThrowsExceptionForInvalidFormat()
     {
-        $data = array('foo' => 'bar');
-
-        $command = \Mockery::mock(
-            'Guzzle\\Service\\Command\\OperationCommand',
-            array(
-                'getResponse' => \Mockery::mock(
-                    'Guzzle\\Http\\Message\\Response',
-                    array('json' => $data, 'getBody' => json_encode($data))
-                ),
-                'getName' => 'MyCommand',
-            )
-        );
-
+        $command = $this->createMockCommand(array('foo' => 'bar'));
         CaseModel::fromCommand($command);
     }
 
@@ -60,13 +39,7 @@ class CaseModelTest extends \Desk\Testing\UnitTestCase
      */
     public function testGetCasePath($commandName, $expected)
     {
-        $command = \Mockery::mock(
-            'Guzzle\\Service\\Command\\OperationCommand',
-            array(
-                'getName' => $commandName,
-            )
-        );
-
+        $command = $this->createMockCommand(array(), $commandName);
         $this->assertSame($expected, CaseModel::getCasePath($command));
     }
 

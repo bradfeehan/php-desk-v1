@@ -12,19 +12,11 @@ class CaseArrayTest extends \Desk\Testing\UnitTestCase
      */
     public function testFromCommand()
     {
-        $data = array(
-            'results' => array(
-                0 => array('case' => array('foo' => 'bar')),
-                1 => array('case' => array('bar' => 'baz')),
-            ),
-        );
-
-        $command = \Mockery::mock(
-            'Guzzle\\Service\\Command\\OperationCommand',
+        $command = $this->createMockCommand(
             array(
-                'getResponse' => \Mockery::mock(
-                    'Guzzle\\Http\\Message\\Response',
-                    array('json' => $data)
+                'results' => array(
+                    0 => array('case' => array('foo' => 'bar')),
+                    1 => array('case' => array('bar' => 'baz')),
                 ),
             )
         );
@@ -43,26 +35,7 @@ class CaseArrayTest extends \Desk\Testing\UnitTestCase
      */
     public function testFromCommandThrowsExceptionForInvalidFormat()
     {
-        $data = array('foo' => 'bar');
-
-        $response = \Mockery::mock(
-            'Guzzle\\Http\\Message\\Response',
-            array('json' => $data, 'getBody' => json_encode($data))
-        );
-
-        $command = \Mockery::mock(
-            'Guzzle\\Service\\Command\\OperationCommand',
-            array(
-                'getResponse' => \Mockery::mock(
-                    'Guzzle\\Http\\Message\\Response',
-                    array(
-                        'json' => $data,
-                        'getBody' => json_encode($data),
-                    )
-                ),
-            )
-        );
-
+        $command = $this->createMockCommand(array('foo' => 'bar'));
         CaseArray::fromCommand($command);
     }
 }

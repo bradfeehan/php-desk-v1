@@ -15,7 +15,7 @@ class AbstractModelTest extends \Desk\Testing\UnitTestCase
      */
     public function testGetResponseKeyValid($content, $key, $expected)
     {
-        $response = $this->mockResponse($content);
+        $response = $this->createMockResponse($content);
         $actual = AbstractModel::getResponseKey($response, $key);
         $this->assertSame($expected, $actual);
     }
@@ -30,15 +30,6 @@ class AbstractModelTest extends \Desk\Testing\UnitTestCase
         );
     }
 
-    private function mockResponse($content)
-    {
-        $class = 'Guzzle\\Http\\Message\\Response';
-        return \Mockery::mock(
-            $class,
-            array('json' => $content, 'getBody' => json_encode($content))
-        );
-    }
-
     /**
      * Tests invalid calls to Desk\AbstractModel::getResponseKey()
      *
@@ -48,7 +39,7 @@ class AbstractModelTest extends \Desk\Testing\UnitTestCase
      */
     public function testGetResponseKeyInvalid($content, $key)
     {
-        $response = $this->mockResponse($content);
+        $response = $this->createMockResponse($content);
         AbstractModel::getResponseKey($response, $key);
     }
 

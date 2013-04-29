@@ -57,6 +57,57 @@ abstract class UnitTestCase extends \Guzzle\Tests\GuzzleTestCase
     }
 
     /**
+     * Creates a mock Guzzle command with data set in its response
+     *
+     * The mock command returned will be a Mockery object, but will
+     * extend from the OperationCommand class. It will implement the
+     * following methods:
+     *    - getResponse() - mock Response object with the following methods:
+     *        - json() - returns the data in $data
+     *        - getBody() - returns JSON-encoded version of $data
+     *    - getName() - returns $commandName
+     *
+     * @param array  $data        Associative array of data in response object
+     * @param string $commandName Command name, returned from getName()
+     *
+     * @return Guzzle\Service\Command\OperationCommand Mock command
+     */
+    public function createMockCommand($data = array(), $commandName = 'MyCommand')
+    {
+        return \Mockery::mock(
+            'Guzzle\\Service\\Command\\OperationCommand',
+            array(
+                'getResponse' => $this->createMockResponse($data),
+                'getName' => $commandName,
+            )
+        );
+    }
+
+    /**
+     * Creates a mock Guzzle response with data
+     *
+     * The mock response returned will be a Mockery object, but will
+     * extend from the Response class. It will implement the following
+     * methods:
+     *    - json() - returns the data in $data
+     *    - getBody() - returns JSON-encoded version of $data
+     *
+     * @param array $data Associative array of data in response object
+     *
+     * @return Guzzle\Http\Message\Response Mock command
+     */
+    public function createMockResponse($data)
+    {
+        return \Mockery::mock(
+            'Guzzle\\Http\\Message\\Response',
+            array(
+                'json' => $data,
+                'getBody' => json_encode($data),
+            )
+        );
+    }
+
+    /**
      * Gets the path for this test case's mock responses
      *
      * @return string

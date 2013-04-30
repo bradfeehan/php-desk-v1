@@ -3,18 +3,17 @@
 namespace Desk\Content\Model;
 
 use Desk\AbstractModel;
-use Guzzle\Service\Command\OperationCommand;
-use Guzzle\Service\Command\ResponseClassInterface;
 
-class TopicModel extends AbstractModel implements ResponseClassInterface
+class TopicModel extends AbstractModel
 {
 
     /**
      * {@inheritdoc}
      */
-    public static function fromCommand(OperationCommand $command)
+    public function getResponseKeyMap()
     {
-        $response = $command->getResponse();
-        return new static(static::getResponseKey($response, 'topic'));
+        return array(
+            'GetTopic' => 'topic',
+        );
     }
 }

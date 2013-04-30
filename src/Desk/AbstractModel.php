@@ -2,58 +2,94 @@
 
 namespace Desk;
 
-use Desk\Exception\ResponseFormatException;
+use Desk\ModelFactory;
 use Guzzle\Common\Collection;
-use Guzzle\Http\Message\Response;
+use Guzzle\Service\Command\OperationCommand;
+use Guzzle\Service\Command\ResponseClassInterface;
 
-abstract class AbstractModel extends Collection
+abstract class AbstractModel extends Collection implements ResponseClassInterface
 {
 
     /**
-     * Gets a value from a Desk.com API response
+     * Singleton instances of concrete child classes of this class
      *
-     * Interprets a response as JSON, and looks through the resulting
-     * structure to retrieve the specified key. An exception of type
-     * UnexpectedValueException is thrown if the key is missing.
+     * These are stored in an associative array which maps child class
+     * names to their instances.
      *
-     * Nested keys can be retrieved using "/", e.g. "foo/bar/baz" will
-     * return "quux" if the response JSON is the following:
-     *
-     * {
-     *   "foo": {
-     *     "bar": {
-     *       "baz": "quux"
-     *     }
-     *   }
-     * }
-     *
-     * If any of the "foo", "bar", or "baz" keys are missing from the
-     * response, an exception will be thrown.
-     *
-     * @param Desk\Http\Message\Response $response The response to check
-     * @param string                     $path     Key path to search
-     *
-     * @return mixed The value of the $path key in the response
-     *
-     * @throws Desk\Exception\ResponseFormatException For missing $path
+     * @var array
      */
-    public static function getResponseKey(Response $response, $path)
+    private static $instances = array();
+
+
+    /**
+     * Gets the singleton instance for the child class it's called on
+     *
+     * @return Desk\AbstractModel
+     */
+    public static function instance()
     {
-        $contents = $response->json();
-        $keys = explode('/', $path);
+        $className = get_called_class();
 
-        foreach ($keys as $key) {
-            if (!is_array($contents) || !array_key_exists($key, $contents)) {
-                throw new ResponseFormatException(
-                    "Invalid response format from Desk API " .
-                    "(expected '$path' element in response). " .
-                    "Full response:\n{$response->getBody()}"
-                );
-            }
-
-            $contents = $contents[$key];
+        if (empty(self::$instances[$className])) {
+            self::$instances[$className] = new static();
         }
 
-        return $contents;
+        return self::$instances[$className];
     }
+
+    /**
+     * Overrides the singleton instance (for dependency injection)
+     *
+     * If $instance is NULL, the instance will be reset to the default.
+     *
+     * @param Desk\AbstractModel $instance
+     */
+    public static function setInstance(AbstractModel $instance = null)
+    {
+        if (!$instance) {
+            self::$instances = array();
+            return;
+        }
+
+        $className = get_called_class();
+        self::$instances[$className] = $instance;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function fromCommand(OperationCommand $command)
+    {
+        $className = get_called_class();
+        return ModelFactory::instance()->factory($className, $command);
+    }
+
+
+    /**
+     * Factory method to create the model from model data
+     *
+     * This factory method will, by default, create an instance of the
+     * model using its constructor. However it can also be overridden
+     * in order to return a different type from the model (e.g. to
+     * return an array instead).
+     *
+     * @param array $data
+     *
+     * @return mixed
+     */
+    public function factory($data)
+    {
+        return new static($data);
+    }
+
+    /**
+     * Gets an array mapping command names to keys in the response
+     *
+     * This array maps names of Guzzle commands to the key in the
+     * corresponding response where the model data is found for that
+     * command.
+     *
+     * @return array
+     */
+    abstract public function getResponseKeyMap();
 }

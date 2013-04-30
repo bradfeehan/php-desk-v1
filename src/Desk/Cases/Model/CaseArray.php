@@ -2,31 +2,34 @@
 
 namespace Desk\Cases\Model;
 
-use Desk\AbstractModel;
-use Guzzle\Service\Command\OperationCommand;
-use Guzzle\Service\Command\ResponseClassInterface;
-use UnexpectedValueException;
+use Desk\AbstractModelArray;
 
-class CaseArray extends AbstractModel implements ResponseClassInterface
+class CaseArray extends AbstractModelArray
 {
 
     /**
      * {@inheritdoc}
      */
-    public static function fromCommand(OperationCommand $command)
+    public function getResponseKeyMap()
     {
-        $response = $command->getResponse();
+        return array(
+            'GetCases' => 'results',
+        );
+    }
 
-        // Make sure "results" key exists
-        $casesData = static::getResponseKey($response, 'results');
+    /**
+     * {@inheritdoc}
+     */
+    public function getModelName()
+    {
+        return 'Desk\\Cases\\Model\\CaseModel';
+    }
 
-        // Build up an array of CaseModel objects from the results
-        $cases = array();
-
-        foreach ((array) $casesData as $result) {
-            $cases[] = new CaseModel($result['case']);
-        }
-
-        return $cases;
+    /**
+     * {@inheritdoc}
+     */
+    public function getResultKey()
+    {
+        return 'case';
     }
 }

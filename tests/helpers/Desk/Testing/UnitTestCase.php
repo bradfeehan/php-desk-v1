@@ -4,6 +4,7 @@ namespace Desk\Testing;
 
 use Guzzle\Service\Client;
 use ReflectionClass;
+use ReflectionMethod;
 
 abstract class UnitTestCase extends \Guzzle\Tests\GuzzleTestCase
 {
@@ -104,6 +105,62 @@ abstract class UnitTestCase extends \Guzzle\Tests\GuzzleTestCase
                 'json' => $data,
                 'getBody' => json_encode($data),
             )
+        );
+    }
+
+    /**
+     * Creates a Mockery mock object with stubs for abstract methods
+     *
+     * This will create a Mockery mock object which extends the class
+     * specified in $className. Any abstract methods which were defined
+     * on the $className class will be implemented by the mock (and
+     * will return NULL by default, unless any other expectations are
+     * later set on the mock).
+     *
+     * Note that with partial mocks (which this will be), all methods
+     * that will be mocked need to be specified at the time the mock is
+     * defined (when this method is being called). If there are any
+     * methods which are non-abstract that will be mocked by this
+     * object, their names should be passed in to the $extraMethods
+     * array.
+     *
+     * @param string $className    The (abstract) class name to mock
+     * @param string $extraMethods Any extra methods to stub
+     *
+     * @return Mockery\MockInterface
+     */
+    public function createAbstractMock($className, $extraMethods = array())
+    {
+        $methodNames = $this->getAbstractMethodNames($className);
+        $methodNameList = implode(',', array_merge($methodNames, $extraMethods));
+
+        $mock = \Mockery::mock("{$className}[{$methodNameList}]");
+
+        foreach ($methodNames as $method) {
+            $mock->shouldReceive($method)->never()->byDefault();
+        }
+
+        return $mock;
+    }
+
+    /**
+     * Gets the names of any abstract methods defined on a class
+     *
+     * @param string $className The name of the (abstract) class
+     *
+     * @return array
+     */
+    private function getAbstractMethodNames($className)
+    {
+        $class = new ReflectionClass($className);
+        $methods = $class->getMethods(ReflectionMethod::IS_ABSTRACT);
+
+        // convert array of ReflectionMethods, to array of method names
+        return array_map(
+            function ($method) {
+                return $method->getName();
+            },
+            $methods
         );
     }
 

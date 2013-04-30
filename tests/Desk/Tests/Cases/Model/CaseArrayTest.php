@@ -2,40 +2,45 @@
 
 namespace Desk\Tests\Cases\Model;
 
-use Desk\Cases\Model\CaseArray;
-
-class CaseArrayTest extends \Desk\Testing\UnitTestCase
+class CaseArrayTest extends \Desk\Testing\ModelArrayTestCase
 {
 
     /**
-     * @covers Desk\Cases\Model\CaseArray::fromCommand
+     * {@inheritdoc}
      */
-    public function testFromCommand()
+    protected function getModelName()
     {
-        $command = $this->createMockCommand(
-            array(
-                'results' => array(
-                    0 => array('case' => array('foo' => 'bar')),
-                    1 => array('case' => array('bar' => 'baz')),
-                ),
-            )
-        );
-
-        $cases = CaseArray::fromCommand($command);
-        $this->assertSame(2, count($cases), 'Wrong number of cases returned');
-
-        foreach ($cases as $case) {
-            $this->assertInstanceOf('Desk\\Cases\\Model\\CaseModel', $case);
-        }
+        return 'Desk\\Cases\\Model\\CaseArray';
     }
 
     /**
-     * @covers Desk\Cases\Model\CaseArray::fromCommand
-     * @expectedException UnexpectedValueException
+     * {@inheritdoc}
      */
-    public function testFromCommandThrowsExceptionForInvalidFormat()
+    public function dataSystem()
     {
-        $command = $this->createMockCommand(array('foo' => 'bar'));
-        CaseArray::fromCommand($command);
+        return array(
+            array(
+                array(
+                    'results' => array(
+                        0 => array('case' => array('foo' => 'bar')),
+                        1 => array('case' => array('bar' => 'baz')),
+                    ),
+                ),
+                'GetCases', 2, 'Desk\\Cases\\Model\\CaseModel'
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function dataSystemInvalid()
+    {
+        return array(
+            array(
+                array('foo' => 'bar'),
+                'GetCases'
+            ),
+        );
     }
 }

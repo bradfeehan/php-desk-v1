@@ -2,40 +2,45 @@
 
 namespace Desk\Tests\Content\Model;
 
-use Desk\Content\Model\TopicArray;
-
-class TopicArrayTest extends \Desk\Testing\UnitTestCase
+class TopicArrayTest extends \Desk\Testing\ModelArrayTestCase
 {
 
     /**
-     * @covers Desk\Content\Model\TopicArray::fromCommand
+     * {@inheritdoc}
      */
-    public function testFromCommand()
+    protected function getModelName()
     {
-        $command = $this->createMockCommand(
-            array(
-                'results' => array(
-                    0 => array('topic' => array('foo' => 'bar')),
-                    1 => array('topic' => array('bar' => 'baz')),
-                ),
-            )
-        );
-
-        $topics = TopicArray::fromCommand($command);
-        $this->assertSame(2, count($topics), 'Wrong number of topics returned');
-
-        foreach ($topics as $topic) {
-            $this->assertInstanceOf('Desk\\Content\\Model\\TopicModel', $topic);
-        }
+        return 'Desk\\Content\\Model\\TopicArray';
     }
 
     /**
-     * @covers Desk\Content\Model\TopicArray::fromCommand
-     * @expectedException UnexpectedValueException
+     * {@inheritdoc}
      */
-    public function testFromCommandThrowsExceptionForInvalidFormat()
+    public function dataSystem()
     {
-        $command = $this->createMockCommand(array('foo' => 'bar'));
-        TopicArray::fromCommand($command);
+        return array(
+            array(
+                array(
+                    'results' => array(
+                        0 => array('topic' => array('foo' => 'bar')),
+                        1 => array('topic' => array('bar' => 'baz')),
+                    ),
+                ),
+                'GetTopics', 2, 'Desk\\Content\\Model\\TopicModel'
+            ),
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function dataSystemInvalid()
+    {
+        return array(
+            array(
+                array('foo' => 'bar'),
+                'GetTopics'
+            ),
+        );
     }
 }

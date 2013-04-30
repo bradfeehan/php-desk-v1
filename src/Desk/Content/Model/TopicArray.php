@@ -2,30 +2,34 @@
 
 namespace Desk\Content\Model;
 
-use Desk\AbstractModel;
-use Guzzle\Service\Command\OperationCommand;
-use Guzzle\Service\Command\ResponseClassInterface;
+use Desk\AbstractModelArray;
 
-class TopicArray extends AbstractModel implements ResponseClassInterface
+class TopicArray extends AbstractModelArray
 {
 
     /**
      * {@inheritdoc}
      */
-    public static function fromCommand(OperationCommand $command)
+    public function getResponseKeyMap()
     {
-        $response = $command->getResponse();
+        return array(
+            'GetTopics' => 'results',
+        );
+    }
 
-        // Make sure "results" key exists
-        $topicsData = static::getResponseKey($response, 'results');
+    /**
+     * {@inheritdoc}
+     */
+    public function getModelName()
+    {
+        return 'Desk\\Content\\Model\\TopicModel';
+    }
 
-        // Build up an array of TopicModel objects from the results
-        $topics = array();
-
-        foreach ((array) $topicsData as $result) {
-            $topics[] = new TopicModel($result['topic']);
-        }
-
-        return $topics;
+    /**
+     * {@inheritdoc}
+     */
+    public function getResultKey()
+    {
+        return 'topic';
     }
 }

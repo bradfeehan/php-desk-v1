@@ -5,10 +5,21 @@ namespace Desk\Tests\Cases\Command;
 class UpdateCaseCommandTest extends \Desk\Testing\OperationTestCase
 {
 
-    protected $client = 'mock.cases';
+    /**
+     * {@inheritdoc}
+     */
+    protected function getClientName()
+    {
+        return 'mock.cases';
+    }
 
-    protected $operation = 'UpdateCase';
-
+    /**
+     * {@inheritdoc}
+     */
+    protected function getOperationName()
+    {
+        return 'UpdateCase';
+    }
 
     public function dataParameterValid()
     {

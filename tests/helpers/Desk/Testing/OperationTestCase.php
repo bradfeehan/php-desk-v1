@@ -6,59 +6,6 @@ abstract class OperationTestCase extends UnitTestCase
 {
 
     /**
-     * The name of the client to be tested
-     *
-     * This should be one of the keys under "services" in the service
-     * description used for the tests.
-     *
-     * @var string
-     */
-    protected $client;
-
-    /**
-     * The name of the operation to be tested
-     *
-     * This should be one of the keys under "operation" in the client's
-     * service description.
-     *
-     * @var string
-     */
-    protected $operation;
-
-
-    public function setUp()
-    {
-        $message = $this->getValidationErrors();
-
-        if ($message) {
-            $this->markTestSkipped($message);
-        }
-    }
-
-    private function getValidationErrors()
-    {
-        if (!is_string($this->getClientName())) {
-            return 'No client name set for ' . get_called_class();
-        }
-
-        if (!is_string($this->getOperationName())) {
-            return 'No operation name set for ' . get_called_class();
-        }
-
-        return null;
-    }
-
-    private function getClientName()
-    {
-        return $this->client;
-    }
-
-    private function getOperationName()
-    {
-        return $this->operation;
-    }
-
-    /**
      * Gets the client specified in self::getClientName()
      *
      * @return Guzzle\Service\Client
@@ -110,6 +57,26 @@ abstract class OperationTestCase extends UnitTestCase
             ->getCommand($this->getOperationName(), $parameters)
             ->prepare();
     }
+
+    /**
+     * The name of the client to be tested
+     *
+     * This should be one of the keys under "services" in the service
+     * description used for the tests.
+     *
+     * @return string
+     */
+    abstract protected function getClientName();
+
+    /**
+     * The name of the operation to be tested
+     *
+     * This should be one of the keys under "operation" in the client's
+     * service description.
+     *
+     * @var string
+     */
+    abstract protected function getOperationName();
 
     /**
      * Provides data for testParameterValid

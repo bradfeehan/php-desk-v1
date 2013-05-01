@@ -5,10 +5,21 @@ namespace Desk\Tests\Cases\Command;
 class GetCaseCommandTest extends \Desk\Testing\OperationTestCase
 {
 
-    protected $client = 'mock.cases';
+    /**
+     * {@inheritdoc}
+     */
+    protected function getClientName()
+    {
+        return 'mock.cases';
+    }
 
-    protected $operation = 'GetCase';
-
+    /**
+     * {@inheritdoc}
+     */
+    protected function getOperationName()
+    {
+        return 'GetCase';
+    }
 
     public function dataParameterValid()
     {

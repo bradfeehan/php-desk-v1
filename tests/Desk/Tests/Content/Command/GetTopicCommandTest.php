@@ -5,10 +5,21 @@ namespace Desk\Tests\Content\Command;
 class GetTopicCommandTest extends \Desk\Testing\OperationTestCase
 {
 
-    protected $client = 'mock.content';
+    /**
+     * {@inheritdoc}
+     */
+    protected function getClientName()
+    {
+        return 'mock.content';
+    }
 
-    protected $operation = 'GetTopic';
-
+    /**
+     * {@inheritdoc}
+     */
+    protected function getOperationName()
+    {
+        return 'GetTopic';
+    }
 
     public function dataParameterValid()
     {

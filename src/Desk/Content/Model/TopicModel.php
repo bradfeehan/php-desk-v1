@@ -15,6 +15,7 @@ class TopicModel extends AbstractModel
         return array(
             'GetTopic' => 'topic',
             'CreateTopic' => 'results/topic',
+            'UpdateTopic' => 'results/topic',
         );
     }
 }

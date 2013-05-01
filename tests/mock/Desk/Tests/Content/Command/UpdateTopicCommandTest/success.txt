@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: must-revalidate, private, max-age=0
+Content-Type: application/json; charset=utf-8
+Date: Mon, 29 Apr 2013 03:56:30 GMT
+ETag: "305ae195b9bc00a99191780c14f86bb6"
+Status: 200
+Content-Length: 121
+Connection: keep-alive
+
+{"success":true,"results":{"topic":{"id":13,"name":"Updated","description":"Updated Description","show_in_portal":true}}}

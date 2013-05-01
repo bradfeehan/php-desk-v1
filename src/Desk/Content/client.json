@@ -65,6 +65,44 @@
 					"minimum": 1
 				}
 			}
+		},
+		"UpdateTopic": {
+			"summary": "Update an existing topic",
+			"httpMethod": "PUT",
+			"uri": "topics/{id}.json",
+			"responseType": "class",
+			"responseClass": "Desk\\Content\\Model\\TopicModel",
+			"parameters": {
+				"id": {
+					"description": "Topic ID to update",
+					"required": true,
+					"location": "uri",
+					"type": "integer",
+					"minimum": 1
+				},
+				"name": {
+					"description": "The name of the topic",
+					"location": "postField",
+					"type": "string"
+				},
+				"description": {
+					"description": "The topic's description",
+					"location": "postField",
+					"type": "string"
+				},
+				"show_in_portal": {
+					"description": "Show the topic in the portal",
+					"location": "postField",
+					"type": "boolean"
+				},
+				"language": {
+					"description": "The topic's language -- this will only be accepted if the multi-language support is turned on for the site and the language is enabled from the admin panel",
+					"location": "postField",
+					"type": "string",
+					"minLength": 2,
+					"maxLength": 2
+				}
+			}
 		}
 	}
 }

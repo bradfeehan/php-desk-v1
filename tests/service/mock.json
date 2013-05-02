@@ -10,15 +10,15 @@
 			}
 		},
 		"mock.account": {
-			"class": "Desk\\Account\\AccountClient",
+			"class": "Desk\\Client\\Account\\AccountClient",
 			"extends": "mock"
 		},
 		"mock.cases": {
-			"class": "Desk\\Cases\\CasesClient",
+			"class": "Desk\\Client\\Cases\\CasesClient",
 			"extends": "mock"
 		},
 		"mock.content": {
-			"class": "Desk\\Content\\ContentClient",
+			"class": "Desk\\Client\\Content\\ContentClient",
 			"extends": "mock"
 		}
 	}

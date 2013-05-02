@@ -1,0 +1,293 @@
+{
+	"name": "Cases",
+	"description": "Client for Desk case API",
+	"operations": {
+		"GetCases": {
+			"summary": "Search cases based on a combination of parameters with pagination",
+			"httpMethod": "GET",
+			"uri": "cases.json",
+			"responseType": "class",
+			"responseClass": "Desk\\Client\\Cases\\Model\\CaseArray",
+			"parameters": {
+				"name": {
+					"description": "Customer name(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"first_name": {
+					"description": "Customer first name(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"last_name": {
+					"description": "Customer last name(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"email": {
+					"description": "Customer email address(es)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string",
+						"pattern": "/.+@.+/"
+					}
+				},
+				"phone": {
+					"description": "Customer phone number(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"company": {
+					"description": "Customer company name(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"twitter": {
+					"description": "Customer Twitter screenname(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"labels": {
+					"description": "Case label(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"case_id": {
+					"description": "Case ID(s)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "integer",
+						"minimum": 1
+					}
+				},
+				"subject": {
+					"description": "Case subject",
+					"location": "query",
+					"type": "string"
+				},
+				"description": {
+					"description": "Case description",
+					"location": "query",
+					"type": "string"
+				},
+				"status": {
+					"description": "Case status(es)",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": ["new", "open", "pending", "resolved", "closed"]
+					}
+				},
+				"priority": {
+					"description": "Case priority(ies), between 1 and 10",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "integer",
+						"minimum": 1,
+						"maximum": 10
+					}
+				},
+				"assigned_group": {
+					"description": "Case assigned group",
+					"location": "query"
+				},
+				"assigned_user": {
+					"description": "Case assigned user ('me', 'none', 'unassigned', or name of agent)",
+					"location": "query",
+					"type": "string"
+				},
+				"channels": {
+					"description": "Channel types ('email', 'twitter', 'chat', 'callback', 'phone')",
+					"location": "query",
+					"type": "array",
+					"items": {
+						"type": "string",
+						"enum": ["email", "twitter", "chat", "callback", "phone"]
+					}
+				},
+				"notes": {
+					"description": "Case notes",
+					"location": "query"
+				},
+				"attachments": {
+					"description": "Case attachment filename",
+					"location": "query"
+				},
+				"created": {
+					"description": "Case created ('today', 'yesterday', 'week', 'month', 'year')",
+					"location": "query",
+					"type": "string",
+					"enum": ["today", "yesterday", "week", "month", "year"]
+				},
+				"updated": {
+					"description": "Case updated ('today', 'yesterday', 'week', 'month', 'year')",
+					"location": "query",
+					"type": "string",
+					"enum": ["today", "yesterday", "week", "month", "year"]
+				},
+				"since_created_at": {
+					"description": "Returns results with a creation date (in Unix time) greater than (that is, more recent than) the specified date",
+					"location": "query",
+					"format": "timestamp"
+				},
+				"max_created_at": {
+					"description": "Returns results with a creation date (in Unix time) less than (that is, older than) or equal to the specified date",
+					"location": "query",
+					"format": "timestamp"
+				},
+				"since_updated_at": {
+					"description": "Returns results with an update date (in Unix time) greater than (that is, more recent than) the specified date",
+					"location": "query",
+					"format": "timestamp"
+				},
+				"max_updated_at": {
+					"description": "Returns results with an update date (in Unix time) less than (that is, older than) or equal to the specified date",
+					"location": "query",
+					"format": "timestamp"
+				},
+				"since_id": {
+					"description": "Returns results with an ID greater than (that is, more recent than) the specified ID",
+					"location": "query",
+					"type": "integer"
+				},
+				"max_id": {
+					"description": "Returns results with an ID less than (that is, older than) or equal to the specified ID",
+					"location": "query",
+					"type": "integer"
+				},
+				"count": {
+					"description": "Specifies the number of records to retrieve",
+					"location": "query",
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 100
+				},
+				"page": {
+					"description": "Specifies the page of results to retrieve (note: there are pagination limits -- see the FAQ for details)",
+					"location": "query",
+					"type": "integer",
+					"minimum": 1
+				}
+			}
+		},
+		"GetCase": {
+			"summary": "Retrieve a case by ID (either Desk ID or external ID)",
+			"httpMethod": "GET",
+			"uri": "cases/{id}.json",
+			"responseType": "class",
+			"responseClass": "Desk\\Client\\Cases\\Model\\CaseModel",
+			"parameters": {
+				"id": {
+					"description": "Case ID to retrieve",
+					"required": true,
+					"location": "uri",
+					"type": "string",
+					"maxLength": 64
+				},
+				"by": {
+					"description": "Specify which field to find the case by, either 'id' or 'external_id' (defaults to 'id' if omitted)",
+					"location": "query",
+					"type": "string",
+					"enum": ["id", "external_id"]
+				}
+			}
+		},
+		"UpdateCase": {
+			"summary": "Update an existing case",
+			"httpMethod": "PUT",
+			"uri": "cases/{id}.json",
+			"responseType": "class",
+			"responseClass": "Desk\\Client\\Cases\\Model\\CaseModel",
+			"parameters": {
+				"id": {
+					"description": "Case ID to update",
+					"required": true,
+					"location": "uri",
+					"type": "integer",
+					"minimum": 1
+				},
+				"subject": {
+					"description": "Case subject",
+					"location": "postField",
+					"type": "string"
+				},
+				"external_id": {
+					"description": "The case's external ID",
+					"location": "postField",
+					"type": "string",
+					"maxLength": 64
+				},
+				"description": {
+					"description": "Case description",
+					"location": "postField",
+					"type": "string"
+				},
+				"priority": {
+					"description": "Case priority, between 1 and 10",
+					"location": "postField",
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 10
+				},
+				"labels": {
+					"description": "Case label(s) (any existing labels that are not specified will be removed, and any new labels will be added)",
+					"location": "postField",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"status": {
+					"description": "Case status",
+					"location": "postField",
+					"type": "string",
+					"enum": ["new", "open", "pending", "resolved", "closed"],
+					"sentAs": "case_status_type_id",
+					"filters": ["Desk\\Client\\Cases\\CasesClient::getCaseStatus"]
+				},
+				"user_id": {
+					"description": "The case's assigned user ID",
+					"location": "postField",
+					"type": "integer",
+					"minimum": 1
+				},
+				"group_id": {
+					"description": "The case's assigned group ID",
+					"location": "postField",
+					"type": "integer",
+					"minimum": 1
+				},
+				"language": {
+					"description": "The case's language (only accepted if multi-language support is turned on for the site and the language is enabled in Admin)",
+					"location": "postField",
+					"type": "string"
+				}
+			}
+		}
+	}
+}

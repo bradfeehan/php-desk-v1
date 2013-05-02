@@ -1,0 +1,108 @@
+{
+	"name": "Content",
+	"description": "Client for Desk content API",
+	"operations": {
+		"CreateTopic": {
+			"summary": "Create a new topic",
+			"httpMethod": "POST",
+			"uri": "topics.json",
+			"responseType": "class",
+			"responseClass": "Desk\\Client\\Content\\Model\\TopicModel",
+			"parameters": {
+				"name": {
+					"description": "The name of the topic",
+					"required": true,
+					"location": "postField",
+					"type": "string",
+					"minLength": 1
+				},
+				"description": {
+					"description": "The topic's description",
+					"location": "postField",
+					"type": "string"
+				},
+				"show_in_portal": {
+					"description": "Show the topic in the portal",
+					"location": "postField",
+					"type": "boolean"
+				}
+			}
+		},
+		"GetTopics": {
+			"summary": "Retrieve topics with pagination",
+			"httpMethod": "GET",
+			"uri": "topics.json",
+			"responseType": "class",
+			"responseClass": "Desk\\Client\\Content\\Model\\TopicArray",
+			"parameters": {
+				"count": {
+					"description": "Specifies the number of records to retrieve",
+					"location": "query",
+					"type": "integer",
+					"minimum": 1,
+					"maximum": 100
+				},
+				"page": {
+					"description": "Specifies the page of results to retrieve (note: there are pagination limits -- see the FAQ for details)",
+					"location": "query",
+					"type": "integer",
+					"minimum": 1
+				}
+			}
+		},
+		"GetTopic": {
+			"summary": "Returns a topic by ID",
+			"httpMethod": "GET",
+			"uri": "topics/{id}.json",
+			"responseType": "class",
+			"responseClass": "Desk\\Client\\Content\\Model\\TopicModel",
+			"parameters": {
+				"id": {
+					"description": "Topic ID to retrieve",
+					"required": true,
+					"location": "uri",
+					"type": "integer",
+					"minimum": 1
+				}
+			}
+		},
+		"UpdateTopic": {
+			"summary": "Update an existing topic",
+			"httpMethod": "PUT",
+			"uri": "topics/{id}.json",
+			"responseType": "class",
+			"responseClass": "Desk\\Client\\Content\\Model\\TopicModel",
+			"parameters": {
+				"id": {
+					"description": "Topic ID to update",
+					"required": true,
+					"location": "uri",
+					"type": "integer",
+					"minimum": 1
+				},
+				"name": {
+					"description": "The name of the topic",
+					"location": "postField",
+					"type": "string"
+				},
+				"description": {
+					"description": "The topic's description",
+					"location": "postField",
+					"type": "string"
+				},
+				"show_in_portal": {
+					"description": "Show the topic in the portal",
+					"location": "postField",
+					"type": "boolean"
+				},
+				"language": {
+					"description": "The topic's language -- this will only be accepted if the multi-language support is turned on for the site and the language is enabled from the admin panel",
+					"location": "postField",
+					"type": "string",
+					"minLength": 2,
+					"maxLength": 2
+				}
+			}
+		}
+	}
+}

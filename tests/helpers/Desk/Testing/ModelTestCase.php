@@ -9,8 +9,8 @@ abstract class ModelTestCase extends UnitTestCase
      * No "covers" annotation here, so this will cover anything it
      * touches. Unfortunately there's no way to cover a class and any
      * implementations overridden in child classes. If there was, we
-     * could use that on Desk\AbstractModel::getResponseKeyMap and all
-     * its child classes.
+     * could use that on Desk\Model\AbstractModel::getResponseKeyMap
+     * and all its child classes.
      */
     public function testGetResponseKeyMap()
     {
@@ -21,7 +21,7 @@ abstract class ModelTestCase extends UnitTestCase
     /**
      * Gets an instance of the model being tested
      *
-     * @return Desk\AbstractModel
+     * @return Desk\Model\AbstractModel
      */
     protected function model()
     {

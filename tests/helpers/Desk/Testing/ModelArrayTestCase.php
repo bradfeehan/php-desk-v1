@@ -9,8 +9,8 @@ abstract class ModelArrayTestCase extends ModelTestCase
      * No "covers" annotation here, so this will cover anything it
      * touches. Unfortunately there's no way to cover a class and any
      * implementations overridden in child classes. If there was, we
-     * could use that on Desk\AbstractModelArray::getModelName and all
-     * its child classes.
+     * could use that on Desk\Model\AbstractModelArray::getModelName
+     * and all its child classes.
      */
     public function testGetModelName()
     {
@@ -22,8 +22,8 @@ abstract class ModelArrayTestCase extends ModelTestCase
      * No "covers" annotation here, so this will cover anything it
      * touches. Unfortunately there's no way to cover a class and any
      * implementations overridden in child classes. If there was, we
-     * could use that on Desk\AbstractModelArray::getResultKey and all
-     * its child classes.
+     * could use that on Desk\Model\AbstractModelArray::getResultKey
+     * and all its child classes.
      */
     public function testGetResultKey()
     {

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2a5cf4f02411bd2428b96755af615327",
+    "hash": "9e3d2f41fbd5b04a60b2cae15bdf7e46",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -157,16 +157,16 @@
     "packages-dev": [
         {
             "name": "mockery/mockery",
-            "version": "0.8.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "0.8.0"
+                "reference": "3bd6f1712642838b4c0524d3a47359940df72e80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/0.8.0",
-                "reference": "0.8.0",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/3bd6f1712642838b4c0524d3a47359940df72e80",
+                "reference": "3bd6f1712642838b4c0524d3a47359940df72e80",
                 "shasum": ""
             },
             "require": {
@@ -206,7 +206,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2013-04-01 12:13:17"
+            "time": "2013-04-29 23:44:28"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -615,7 +615,8 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "guzzle/guzzle": 20
+        "guzzle/guzzle": 20,
+        "mockery/mockery": 20
     },
     "platform": {
         "php": ">=5.3"

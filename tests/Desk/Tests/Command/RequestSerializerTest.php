@@ -5,9 +5,19 @@ namespace Desk\Tests\Command;
 use Desk\Command\RequestSerializer;
 use Guzzle\Service\Client as ServiceClient;
 use Guzzle\Service\Command\OperationCommand;
+use ReflectionClass;
 
 class RequestSerializerTest extends \Desk\Testing\UnitTestCase
 {
+
+    public function setUp()
+    {
+        // Clear value of RequestSerializer::$instance between tests
+        $reflection = new ReflectionClass('Desk\\Command\\RequestSerializer');
+        $property = $reflection->getProperty('instance');
+        $property->setAccessible(true);
+        $property->setValue(null);
+    }
 
     private static function createRequest()
     {

@@ -15,11 +15,9 @@ class RequestSerializer extends DefaultRequestSerializer
      */
     public static function getInstance()
     {
-        // @codeCoverageIgnoreStart
         if (!self::$instance) {
             self::$instance = new static(VisitorFlyweight::getInstance());
         }
-        // @codeCoverageIgnoreEnd
 
         return self::$instance;
     }

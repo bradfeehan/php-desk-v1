@@ -65,9 +65,10 @@ class ModelFactoryTest extends \Desk\Testing\UnitTestCase
      */
     public function testGetResponseKey()
     {
-        $model = \Mockery::mock('Desk\\Model\\AbstractModel[getResponseKeyMap]')
-            ->shouldReceive('getResponseKeyMap')
-            ->andReturn(array('fooCommand' => 'path/to/key'))
+        $model = \Mockery::mock('Desk\\Model\\AbstractModel[getResponseKeyFor]')
+            ->shouldReceive('getResponseKeyFor')
+            ->with('fooCommand')
+            ->andReturn('path/to/key')
             ->mock();
 
         $modelName = get_class($model);
@@ -86,23 +87,6 @@ class ModelFactoryTest extends \Desk\Testing\UnitTestCase
     {
         $model = \Mockery::mock('stdClass');
         $this->instance()->getResponseKey(get_class($model), 'irrelevant');
-    }
-
-    /**
-     * @covers Desk\Model\ModelFactory::getResponseKey
-     * @expectedException Desk\Exception\UnexpectedValueException
-     */
-    public function testGetResponseKeyThrowsExceptionForUnknownCommand()
-    {
-        $model = \Mockery::mock('Desk\\Model\\AbstractModel[getResponseKeyMap]')
-            ->shouldReceive('getResponseKeyMap')
-            ->andReturn(array('fooCommand' => 'path/to/key'))
-            ->mock();
-
-        $modelName = get_class($model);
-        $modelName::setInstance($model);
-
-        $this->instance()->getResponseKey($modelName, 'barCommand');
     }
 
     /**

@@ -3,8 +3,9 @@
 namespace Desk\Tests\Model;
 
 use Desk\Model\AbstractModel;
+use Desk\Model\ResponseKeyMapModelArray;
 
-class AbstractModelArrayTest extends \Desk\Testing\UnitTestCase
+class ResponseKeyMapModelArrayTest extends \Desk\Testing\UnitTestCase
 {
 
     /**
@@ -16,7 +17,7 @@ class AbstractModelArrayTest extends \Desk\Testing\UnitTestCase
     }
 
     /**
-     * @covers Desk\Model\AbstractModelArray::factory
+     * @covers Desk\Model\ResponseKeyMapModelArray::factory
      */
     public function testFactory()
     {
@@ -34,7 +35,7 @@ class AbstractModelArrayTest extends \Desk\Testing\UnitTestCase
         $modelName = get_class($model);
         $modelName::setInstance($model);
 
-        $modelArray = $this->createAbstractMock('Desk\\Model\\AbstractModelArray');
+        $modelArray = $this->createAbstractMock('Desk\\Model\\ResponseKeyMapModelArray');
         $modelArray->shouldReceive(
             array(
                 'getModelName' => $modelName,

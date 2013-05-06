@@ -77,19 +77,7 @@ class ModelFactory
             );
         }
 
-        // Get the response key map
-        $map = $modelName::instance()->getResponseKeyMap();
-
-        // Ensure the command name exists in the response key map
-        if (!is_array($map) || !array_key_exists($commandName, $map)) {
-            throw new UnexpectedValueException(
-                "Tried to create model '$modelName' from command " .
-                "'$commandName', but this command name doesn't " .
-                "exist in the response key map for this model"
-            );
-        }
-
-        return $map[$commandName];
+        return $modelName::instance()->getResponseKeyFor($commandName);
     }
 
     /**

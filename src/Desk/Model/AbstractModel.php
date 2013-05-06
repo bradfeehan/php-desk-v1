@@ -39,7 +39,7 @@ abstract class AbstractModel extends Collection implements ResponseClassInterfac
     /**
      * Overrides the singleton instance (for dependency injection)
      *
-     * If $instance is NULL, the instance will be reset to the default.
+     * If $instance is NULL, all instances are reset to the default.
      *
      * @param Desk\Model\AbstractModel $instance
      */
@@ -70,7 +70,7 @@ abstract class AbstractModel extends Collection implements ResponseClassInterfac
      * This factory method will, by default, create an instance of the
      * model using its constructor. However it can also be overridden
      * in order to return a different type from the model (e.g. to
-     * return an array instead).
+     * return an array, another primitive, or different class instead).
      *
      * @param array $data
      *
@@ -82,13 +82,11 @@ abstract class AbstractModel extends Collection implements ResponseClassInterfac
     }
 
     /**
-     * Gets an array mapping command names to keys in the response
+     * Gets the response key where model data is found for a command
      *
-     * This array maps names of Guzzle commands to the key in the
-     * corresponding response where the model data is found for that
-     * command.
+     * @param string $commandName The name of the command
      *
-     * @return array
+     * @return string The key in the response containing model data
      */
-    abstract public function getResponseKeyMap();
+    abstract public function getResponseKeyFor($commandName);
 }

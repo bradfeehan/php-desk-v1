@@ -2,9 +2,9 @@
 
 namespace Desk\Client\Content\Model;
 
-use Desk\Model\AbstractModel;
+use Desk\Model\ResponseKeyMapModel;
 
-class TopicModel extends AbstractModel
+class TopicModel extends ResponseKeyMapModel
 {
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Desk\Model;
 
-abstract class AbstractModelArray extends AbstractModel
+abstract class ResponseKeyMapModelArray extends ResponseKeyMapModel
 {
 
     /**
